@@ -1,13 +1,15 @@
 import Vue from "vue";
 import App from "./App.vue";
 
+import "@/assets/css/modify-nprogress.css";
+
 Vue.config.productionTip = false;
 
-import { router } from "@/route/router.js";
-
 import TypeNav from "@/pages/Home/TypeNav/TypeNav.vue";
+
+import { router } from "@/route/router.js";
+import { store } from "./store/store";
 import { requestCategoryList } from "./api/api-manage/api";
-import "@/assets/css/modify-nprogress.css";
 
 requestCategoryList();
 
@@ -15,6 +17,7 @@ requestCategoryList();
 Vue.component(TypeNav.name, TypeNav);
 
 new Vue({
+  store,
   router, // 传入路由配置文件
   render: (h) => h(App),
 }).$mount("#app");
