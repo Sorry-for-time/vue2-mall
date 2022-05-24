@@ -3,11 +3,11 @@
     <!-- 页首 -->
     <MallHeader />
 
-    <!-- 路由组件出口 -->
+    <!-- 路由组件视图 -->
     <router-view />
 
     <!-- 页尾 -->
-    <MallFooter />
+    <MallFooter v-show="$route.meta.show" />
   </div>
 </template>
 
