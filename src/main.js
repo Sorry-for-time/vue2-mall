@@ -5,8 +5,7 @@ Vue.config.productionTip = false;
 
 import { router } from "@/route/router.js";
 
-Vue.use(router);
-
 new Vue({
+  router, // 传入路由配置文件
   render: (h) => h(App),
 }).$mount("#app");

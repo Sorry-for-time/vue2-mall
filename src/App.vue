@@ -4,7 +4,7 @@
     <MallHeader />
 
     <!-- 路由组件出口 -->
-    <router-view></router-view>
+    <router-view />
 
     <!-- 页尾 -->
     <MallFooter />
