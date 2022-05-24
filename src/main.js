@@ -6,6 +6,10 @@ Vue.config.productionTip = false;
 import { router } from "@/route/router.js";
 
 import TypeNav from "@/pages/Home/TypeNav/TypeNav.vue";
+import { requestCategoryList } from "./api/api-manage/api";
+import "@/assets/css/modify-nprogress.css";
+
+requestCategoryList();
 
 // 注册全局组件 - 三级联动组件
 Vue.component(TypeNav.name, TypeNav);
