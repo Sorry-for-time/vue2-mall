@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # speical circumstances
 !.gitignore
+
+# references
+references-code
