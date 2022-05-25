@@ -2,42 +2,61 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container">
-      <h2 class="all">全部商品分类</h2>
-      <nav class="nav">
-        <a href="###">服装城</a>
-        <a href="###">美妆馆</a>
-        <a href="###">尚品汇超市</a>
-        <a href="###">全球购</a>
-        <a href="###">闪购</a>
-        <a href="###">团购</a>
-        <a href="###">有趣</a>
-        <a href="###">秒杀</a>
-      </nav>
-      <div class="sort">
-        <div class="all-sort-list2">
-          <!-- 一级分类 -->
-          <div class="item" v-for="c1 in categoryList" :key="c1.categoryId">
-            <h3>
-              <a href="">{{ c1.categoryName }}</a>
-            </h3>
-            <div class="item-list clearfix">
+      <!-- 在离开列表后才清除样式 -->
+      <div @mouseleave="leaveCategoryList">
+        <h2 class="all">全部商品分类</h2>
+        <nav class="nav">
+          <a href="###">服装城</a>
+          <a href="###">美妆馆</a>
+          <a href="###">尚品汇超市</a>
+          <a href="###">全球购</a>
+          <a href="###">闪购</a>
+          <a href="###">团购</a>
+          <a href="###">有趣</a>
+          <a href="###">秒杀</a>
+        </nav>
+        <div class="sort">
+          <div class="all-sort-list2">
+            <!--
+            为了练习下 js 逻辑, 所以就不用 :hover 来改变背景了...
+           -->
+            <!-- 一级分类 -->
+            <div
+              class="item"
+              v-for="(c1, index) in categoryList"
+              @mouseenter="changeRecordCompareValue(index)"
+              :class="{ 'sky-blue-bgc': index === currentCompareValue }"
+              :key="c1.categoryId"
+            >
+              <h3>
+                <a href="">{{ c1.categoryName }}</a>
+              </h3>
+
               <!-- 二级分类 -->
+              <!-- 通过 :style 动态设置隐藏/显示属性 -->
               <div
-                class="subitem"
-                v-for="c2 in c1.categoryChild"
-                :key="c2.categoryId"
+                class="item-list clearfix"
+                :style="{
+                  display: currentCompareValue === index ? 'block' : 'none',
+                }"
               >
-                <dl class="fore">
-                  <dt>
-                    <a href="">{{ c2.categoryName }}</a>
-                  </dt>
-                  <dd>
-                    <!-- 三级分类 -->
-                    <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                      <a href="">{{ c3.categoryName }}</a>
-                    </em>
-                  </dd>
-                </dl>
+                <div
+                  class="subitem"
+                  v-for="c2 in c1.categoryChild"
+                  :key="c2.categoryId"
+                >
+                  <dl class="fore">
+                    <dt>
+                      <a href="">{{ c2.categoryName }}</a>
+                    </dt>
+                    <dd>
+                      <!-- 三级分类 -->
+                      <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
+                        <a href="">{{ c3.categoryName }}</a>
+                      </em>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </div>
           </div>
@@ -53,7 +72,17 @@ import { mapState } from "vuex";
 export default {
   name: "TypeNav",
   data() {
-    return {};
+    return {
+      currentCompareValue: -1,
+    };
+  },
+  methods: {
+    changeRecordCompareValue(index) {
+      this.currentCompareValue = index;
+    },
+    leaveCategoryList() {
+      this.currentCompareValue = -1;
+    },
   },
   computed: {
     /* ...mapState({
@@ -117,6 +146,10 @@ export default {
 
       .all-sort-list2 {
         .item {
+          &.sky-blue-bgc {
+            background-color: skyblue;
+          }
+
           h3 {
             line-height: 30px;
             font-size: 14px;
@@ -181,12 +214,6 @@ export default {
                   }
                 }
               }
-            }
-          }
-
-          &:hover {
-            .item-list {
-              display: block;
             }
           }
         }

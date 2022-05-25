@@ -3,6 +3,9 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
+// 修改 webkit系浏览器默认滚动条样式
+import "@/assets/css/scroll-bar.css";
+
 import TypeNav from "@/pages/Home/TypeNav/TypeNav.vue";
 
 import { router } from "@/route/router.js";
