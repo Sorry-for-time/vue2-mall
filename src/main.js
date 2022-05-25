@@ -8,8 +8,8 @@ Vue.config.productionTip = false;
 import TypeNav from "@/pages/Home/TypeNav/TypeNav.vue";
 
 import { router } from "@/route/router.js";
-import { store } from "./store/store";
-import { requestCategoryList } from "./api/api-manage/api";
+import { store } from "@/store/store.js";
+import { requestCategoryList } from "@/api/api-manage/api.js";
 
 requestCategoryList();
 
