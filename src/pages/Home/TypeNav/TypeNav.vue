@@ -3,20 +3,26 @@
   <div class="type-nav">
     <div class="container">
       <!-- 在离开列表后才清除样式 -->
+      <h2 class="all">全部商品分类</h2>
+      <nav class="nav">
+        <a href="###">服装城</a>
+        <a href="###">美妆馆</a>
+        <a href="###">尚品汇超市</a>
+        <a href="###">全球购</a>
+        <a href="###">闪购</a>
+        <a href="###">团购</a>
+        <a href="###">有趣</a>
+        <a href="###">秒杀</a>
+      </nav>
+
+      <!-- 在离开容器后移除掉最后一次经过的选项的背景 -->
       <div @mouseleave="leaveCategoryList">
-        <h2 class="all">全部商品分类</h2>
-        <nav class="nav">
-          <a href="###">服装城</a>
-          <a href="###">美妆馆</a>
-          <a href="###">尚品汇超市</a>
-          <a href="###">全球购</a>
-          <a href="###">闪购</a>
-          <a href="###">团购</a>
-          <a href="###">有趣</a>
-          <a href="###">秒杀</a>
-        </nav>
         <div class="sort">
-          <div class="all-sort-list2">
+          <!--
+            不对每个标签绑定事件, 防止绑定过多回调或者创建过多子组件(使用 router-link)导致页面渲染抖动
+            而是对外层的容器绑定, 通过对标签添加自定义属性来确定点击的元素
+          -->
+          <div class="all-sort-list2" @click="goSearch($event)">
             <!--
             为了练习下 js 逻辑, 所以就不用 :hover 来改变背景了...
            -->
@@ -29,7 +35,14 @@
               :key="c1.categoryId"
             >
               <h3>
-                <a href="">{{ c1.categoryName }}</a>
+                <!-- 通过添加自定义属性给标签进行分类和定位 -->
+                <!-- 要主要属性的大小写转换 -->
+                <a
+                  :data-category-name="c1.categoryName"
+                  :data-category1-id="c1.categoryChild"
+                >
+                  {{ c1.categoryName }}
+                </a>
               </h3>
 
               <!-- 二级分类 -->
@@ -47,12 +60,22 @@
                 >
                   <dl class="fore">
                     <dt>
-                      <a href="">{{ c2.categoryName }}</a>
+                      <a
+                        :data-category-name="c2.categoryName"
+                        :data-category2-id="c2.categoryChild"
+                      >
+                        {{ c2.categoryName }}
+                      </a>
                     </dt>
                     <dd>
                       <!-- 三级分类 -->
                       <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                        <a href="">{{ c3.categoryName }}</a>
+                        <a
+                          :data-category-name="c3.categoryName"
+                          :data-category3-id="c3.categoryId"
+                        >
+                          {{ c3.categoryName }}
+                        </a>
                       </em>
                     </dd>
                   </dl>
@@ -68,6 +91,8 @@
 
 <script>
 import { mapState } from "vuex";
+// 使用 lodash 的 throttle 来进行节流
+import throttle from "lodash/throttle";
 
 export default {
   name: "TypeNav",
@@ -77,11 +102,39 @@ export default {
     };
   },
   methods: {
-    changeRecordCompareValue(index) {
+    changeRecordCompareValue: throttle(function (index) {
       this.currentCompareValue = index;
-    },
+    }, 100),
+
     leaveCategoryList() {
       this.currentCompareValue = -1;
+    },
+
+    // 路由跳转
+    goSearch(event) {
+      // 通过节点的 dataset 能取得节点的自定义属性, 且为驼峰命名方式, 这里使用对象结构来进行值提取
+      const {
+        categoryName,
+        category1Id: category1id,
+        category2Id: category2id,
+        category3Id: category3id,
+      } = event.target.dataset;
+
+      // 根据不同的情况进路由信息判断
+      if (categoryName) {
+        const location = { name: "search" };
+        let query = { categoryName: categoryName };
+        // 整理参数
+        if (category1id) {
+          query.category1Id = category1id;
+        } else if (category2id) {
+          query.category2Id = category2id;
+        } else if (category3id) {
+          query.category3Id = category3id;
+        }
+        location.query = query;
+        this.$router.push(location);
+      }
     },
   },
   computed: {
