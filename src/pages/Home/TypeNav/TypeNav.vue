@@ -185,8 +185,6 @@ export default {
   },
 
   mounted() {
-    // 请求视图默认页视图
-    this.$store.dispatch("home/categoryList");
     // 如果当前的路由路径不是 /home 的话, 隐藏分类显示
     if (this.$route.path !== "/home") {
       this.isCategoryNeedShow = false;

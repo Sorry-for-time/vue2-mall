@@ -18,6 +18,10 @@ import MallFooter from "./components/footer/MallFooter.vue";
 export default {
   name: "App",
   components: { MallHeader, MallFooter },
+  mounted() {
+    // 请求视图默认页视图数据
+    this.$store.dispatch("home/categoryList");
+  },
 };
 </script>
 
