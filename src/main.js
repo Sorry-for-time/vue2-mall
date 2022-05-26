@@ -1,8 +1,10 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "@/App.vue";
 import TypeNav from "@/pages/Home/TypeNav/TypeNav.vue";
 
 Vue.config.productionTip = false;
+
+import "@/mock/mock-data-simulate.js"; // mockjs 模拟数据
 
 // 修改 webkit系浏览器默认滚动条样式
 import "@/assets/css/scroll-bar.css";
@@ -15,6 +17,6 @@ Vue.component(TypeNav.name, TypeNav);
 
 new Vue({
   store,
-  router, // 传入路由配置文件
+  router,
   render: (h) => h(App),
 }).$mount("#app");

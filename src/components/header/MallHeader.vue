@@ -71,16 +71,12 @@ export default {
         params: { keyword: this.keyword || undefined },
       };
 
-      // 如果路径中也包含了 query 参数就跟着传递过去
+      // 如果路径中也包含了 query 参数就跟着传递过去(空对象的情况也传过去)
       if (this.$route.query) {
         location.query = this.$route.query;
       }
 
-      this.$router.push(
-        location,
-        () => {},
-        () => {}
-      );
+      this.$router.push(location);
     },
   },
 };

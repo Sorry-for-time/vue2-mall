@@ -19,7 +19,7 @@ export default {
   name: "App",
   components: { MallHeader, MallFooter },
   mounted() {
-    // 请求视图默认页视图数据
+    // 在跟组件请求视图默认页视图数据(只请求一次), 减少页面切换带来的数据重复请求
     this.$store.dispatch("home/categoryList");
   },
 };

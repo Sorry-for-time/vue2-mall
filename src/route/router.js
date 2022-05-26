@@ -50,6 +50,8 @@ const router = new VueRouter({
           keyword: $route.params.keyword,
         };
       },
+
+      //元数据信息
       meta: {
         show: true,
       },

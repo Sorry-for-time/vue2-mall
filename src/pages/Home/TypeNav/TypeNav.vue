@@ -131,7 +131,6 @@ export default {
       this.currentSelectIndex = -1;
       // 在当前路由路径不为 /home 的情款下鼠标离开列表后隐藏列表
       if (this.$route.path !== "/home") {
-        console.log(this.$route.path);
         this.isCategoryNeedShow = false;
       }
     },
@@ -141,7 +140,7 @@ export default {
       // 通过节点的 dataset 能取得节点的自定义属性, 且为驼峰命名方式, 这里使用对象结构来进行值提取
       const { categoryName, category1id, category2id, category3id } =
         event.target.dataset;
-      // 根据不同的情况进路由信息判断
+      // 根据不同的情况进行路由信息判断
       if (categoryName) {
         const packingData = { name: "search" };
         let query = { categoryName: categoryName };
@@ -153,12 +152,15 @@ export default {
         } else if (category3id) {
           query.category3Id = category3id;
         }
-        // 如果路由跳转的时候带有 params 参数, 那么也传递过去
+
+        // 如果路由跳转的时候带有 params 参数, 那么也传递过去(就算是个空对象也传过去)
         if (this.$route.params) {
           Reflect.set(packingData, "params", this.$route.params);
         }
+        // 使用 Reflect API 绑定为对象最追加一个属性
         Reflect.set(packingData, "query", query);
-        // 使用 Reflect API 绑定为对象最追加一个属性😊
+
+        // 追加路由信息
         this.$router.push(packingData);
       }
     },

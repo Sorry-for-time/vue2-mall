@@ -4,10 +4,14 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
+        <div class="swiper-container" ref="swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
+            <div
+              class="swiper-slide"
+              v-for="carousel in bannerList"
+              :key="carousel.id"
+            >
+              <img :src="carousel.imgUrl" />
             </div>
           </div>
           <!-- 如果需要分页器 -->
@@ -18,6 +22,7 @@
           <div class="swiper-button-next"></div>
         </div>
       </div>
+
       <div class="right">
         <div class="news">
           <h4>
@@ -92,8 +97,53 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import Swiper from "swiper";
+import "@/../node_modules/swiper/css/swiper.min.css";
+
 export default {
   name: "ListContainer",
+  computed: {
+    ...mapState("home", {
+      bannerList: (state) => state.bannerList,
+    }),
+  },
+  watch: {
+    bannerList: {
+      deep: true,
+      handler() {
+        // 等待数据更新之后 且 dom 更新完成后执行回调
+        this.$nextTick(() => {
+          //初始化Swiper类的实例
+          new Swiper(this.$refs.swiper, {
+            direction: "horizontal",
+            loop: true,
+            // 如果需要分页器
+            pagination: {
+              el: ".swiper-pagination",
+              type: "bullets",
+              clickable: true,
+            },
+            //自动轮播
+            autoplay: {
+              delay: 1000,
+              stopOnLastSlide: false,
+              disableOnInteraction: false,
+            },
+            // 如果需要前进后退按钮
+            navigation: {
+              prevEl: ".swiper-button-prev",
+              nextEl: ".swiper-button-next",
+            },
+          });
+        });
+      },
+    },
+  },
+  mounted() {
+    // 获取 mock 提供的模拟数据
+    this.$store.dispatch("home/getBannerList");
+  },
 };
 </script>
 
@@ -270,3 +320,21 @@ export default {
   }
 }
 </style>
+
+<!-- <style lang="scss">
+// 这里用 sass 的数组和循环来简化下原教程写了10几个的 item 样式单位配置
+$item-units: (
+  (0px, -5px),
+  (-62px, -5px),
+  (-126px, -5px),
+  (-190px, -5px),
+  (0px, -76px),
+  (-62px, -76px),
+  (-126px, -76px),
+  (-190px, -76px),
+  (0px, -146px),
+  (-62px, -146px),
+  (-126px, -146px),
+  (-190px, -146px)
+);
+</style> -->
