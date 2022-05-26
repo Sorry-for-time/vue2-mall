@@ -65,16 +65,21 @@ export default {
       // 路由 query 传递参数, 字符串形式
       // this.$router.push(`/search/${this.keyword}/`);
 
-      // 对象传参
+      const location = {
+        name: "search",
+        // 使用 undefined 可以解决路径为空串的情况
+        params: { keyword: this.keyword || undefined },
+      };
+
+      // 如果路径中也包含了 query 参数就跟着传递过去
+      if (this.$route.query) {
+        location.query = this.$route.query;
+      }
+
       this.$router.push(
-        {
-          name: "search",
-          // 使用 undefined 可以解决路径为空串的情况
-          params: { keyword: this.keyword || undefined },
-        }
-        // 通过添加成功和失败回调解决重复点击抛出的问题
-        // () => {}, // 成功回调
-        // () => {} // 失败回调
+        location,
+        () => {},
+        () => {}
       );
     },
   },

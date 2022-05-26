@@ -32,8 +32,8 @@
                   <!-- 要注意属性的大小写转换 -->
                   <!--
                     data-*xxx 属性 MDN 参考文档
-                    https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*
                     https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Howto/Use_data_attributes
+                    https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*
                   -->
                   <a
                     :data-category-name="c1.categoryName"
@@ -101,7 +101,7 @@
 
 <script>
 import { mapState } from "vuex";
-import throttle from "lodash/throttle"; // 使用 lodash 的 throttle 来进行节流
+import throttle from "lodash/throttle"; /* 使用 lodash 的 throttle 来进行节流 */
 
 export default {
   name: "TypeNav",
@@ -141,7 +141,6 @@ export default {
       // 通过节点的 dataset 能取得节点的自定义属性, 且为驼峰命名方式, 这里使用对象结构来进行值提取
       const { categoryName, category1id, category2id, category3id } =
         event.target.dataset;
-
       // 根据不同的情况进路由信息判断
       if (categoryName) {
         const packingData = { name: "search" };
@@ -154,8 +153,12 @@ export default {
         } else if (category3id) {
           query.category3Id = category3id;
         }
-        // 使用 Reflect API 绑定为对象最追加一个属性😊
+        // 如果路由跳转的时候带有 params 参数, 那么也传递过去
+        if (this.$route.params) {
+          Reflect.set(packingData, "params", this.$route.params);
+        }
         Reflect.set(packingData, "query", query);
+        // 使用 Reflect API 绑定为对象最追加一个属性😊
         this.$router.push(packingData);
       }
     },
