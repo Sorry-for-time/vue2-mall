@@ -14,6 +14,7 @@
 <script>
 import MallHeader from "./components/header/MallHeader.vue";
 import MallFooter from "./components/footer/MallFooter.vue";
+
 export default {
   name: "App",
   components: { MallHeader, MallFooter },
@@ -22,6 +23,7 @@ export default {
 
 <style lang="scss">
 #app {
+  cursor: default;
   margin: 0;
   padding: 0;
 }

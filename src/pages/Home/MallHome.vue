@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- 三级联动组件 -->
     <TypeNav />
     <ListContainer />
     <ReCommend />
