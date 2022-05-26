@@ -1,8 +1,13 @@
-import { requestCategoryList, requestBannerList } from "@/network/api/apis";
+import {
+  requestCategoryList,
+  requestBannerList,
+  requestFloorList,
+} from "@/network/api/apis";
 
 const state = {
   categoryList: [],
   bannerList: [],
+  floorList: [],
 };
 
 const getters = {};
@@ -21,6 +26,13 @@ const actions = {
       context.commit("GET_BANNER_LIST", result.data);
     }
   },
+
+  async getFloorList(context) {
+    const result = await requestFloorList();
+    if (result.code.toString() === "200") {
+      context.commit("GET_FLOOR_LIST", result.data);
+    }
+  },
 };
 
 const mutations = {
@@ -30,6 +42,10 @@ const mutations = {
 
   GET_BANNER_LIST(state, payload) {
     state.bannerList = payload;
+  },
+
+  GET_FLOOR_LIST(state, payload) {
+    state.floorList = payload;
   },
 };
 

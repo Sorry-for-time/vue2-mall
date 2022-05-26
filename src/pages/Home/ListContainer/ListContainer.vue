@@ -140,10 +140,6 @@ export default {
       },
     },
   },
-  mounted() {
-    // 获取 mock 提供的模拟数据
-    this.$store.dispatch("home/getBannerList");
-  },
 };
 </script>
 

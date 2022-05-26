@@ -19,4 +19,9 @@ new Vue({
   store,
   router,
   render: (h) => h(App),
+  beforeCreate() {
+    Vue.prototype.$UUID = () => {
+      return window.crypto.randomUUID();
+    };
+  },
 }).$mount("#app");

@@ -12,6 +12,7 @@ export const requestBannerList = () => {
   return mockApi.get("/banner");
 };
 
+// mock 提供的 floors 数据
 export const requestFloorList = () => {
   return mockApi.get("/floors");
 };

@@ -21,6 +21,10 @@ export default {
   mounted() {
     // 在跟组件请求视图默认页视图数据(只请求一次), 减少页面切换带来的数据重复请求
     this.$store.dispatch("home/categoryList");
+
+    // 获取 mock 模拟的数据
+    this.$store.dispatch("home/getBannerList");
+    this.$store.dispatch("home/getFloorList");
   },
 };
 </script>

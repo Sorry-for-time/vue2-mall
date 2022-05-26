@@ -5,12 +5,14 @@
     <ReCommend />
     <MallRank />
     <MallGuessLike />
-    <MallFloor />
-    <MallFloor />
+
+    <MallFloor v-for="floor in floorList" :key="floor.id" :floor="floor" />
+
     <MallBrand />
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import ListContainer from "@/pages/Home/ListContainer/ListContainer.vue";
 import ReCommend from "@/pages/Home/ReCommend/ReCommend.vue";
 import MallRank from "@/pages/Home/MallRank/MallRank.vue";
@@ -27,6 +29,12 @@ export default {
     MallGuessLike,
     MallFloor,
     MallBrand,
+  },
+
+  computed: {
+    ...mapState("home", {
+      floorList: (state) => state.floorList,
+    }),
   },
 };
 </script>
