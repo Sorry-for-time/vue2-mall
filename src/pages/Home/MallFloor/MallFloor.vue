@@ -7,11 +7,7 @@
         <div class="fr">
           <ul class="nav-tabs clearfix">
             <li class="active">
-              <a
-                data-toggle="tab"
-                v-for="(nav, index) in floor.navList"
-                :key="index"
-              >
+              <a data-toggle="tab" v-for="(nav, index) in floor.navList" :key="index">
                 {{ nav.text }}
               </a>
             </li>
@@ -31,23 +27,10 @@
               <img :src="floor.imgUrl" />
             </div>
             <div class="floorBanner">
-              <div class="swiper-container" id="floor1Swiper" ref="floor">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide"
-                    v-for="carousel in floor.carouselList"
-                    :key="carousel.id"
-                  >
-                    <img :src="carousel.imgUrl" />
-                  </div>
-                </div>
-                <!-- 如果需要分页器 -->
-                <div class="swiper-pagination"></div>
 
-                <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
+              <!-- 轮播图 -->
+              <Carousel :carouselList="floor.carouselList" />
+
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
@@ -78,9 +61,6 @@
 </template>
 
 <script>
-import Swiper from "swiper";
-import "@/../node_modules/swiper/css/swiper.min.css";
-
 export default {
   name: "MallFloor",
   props: {
@@ -88,42 +68,6 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  data() {
-    return {};
-  },
-
-  components: {},
-
-  methods: {},
-
-  computed: {},
-
-  mounted() {
-    this.$nextTick(() => {
-      //初始化Swiper类的实例
-      new Swiper(this.$refs.floor, {
-        direction: "horizontal",
-        loop: true,
-        // 如果需要分页器
-        pagination: {
-          el: ".swiper-pagination",
-          type: "bullets",
-          clickable: true,
-        },
-        //自动轮播
-        autoplay: {
-          delay: 1000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-        },
-        // 如果需要前进后退按钮
-        navigation: {
-          prevEl: ".swiper-button-prev",
-          nextEl: ".swiper-button-next",
-        },
-      });
-    });
   },
 };
 </script>

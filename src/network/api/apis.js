@@ -16,3 +16,8 @@ export const requestBannerList = () => {
 export const requestFloorList = () => {
   return mockApi.get("/floors");
 };
+
+// 取得搜索数据
+export function requestSearchInfo(params) {
+  return requestFn.post("/list", params);
+}

@@ -38,6 +38,7 @@
             id="autocomplete"
             class="input-error input-xxlarge"
             v-model="keyword"
+            @keydown.enter.prevent="goSearch"
           />
           <button
             class="sui-btn btn-xlarge btn-danger"

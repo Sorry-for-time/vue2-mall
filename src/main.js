@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "@/App.vue";
 import TypeNav from "@/pages/Home/TypeNav/TypeNav.vue";
+import Carousel from "@/components/carousel/Carousel.vue";
 
 Vue.config.productionTip = false;
 
@@ -14,6 +15,7 @@ import { store } from "@/store/store.js";
 
 // 注册全局组件 -> 三级联动组件
 Vue.component(TypeNav.name, TypeNav);
+Vue.component(Carousel.name, Carousel);
 
 new Vue({
   store,

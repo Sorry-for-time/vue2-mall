@@ -2,7 +2,7 @@
   <div>
     <TypeNav />
     <ListContainer />
-    <ReCommend />
+    <Recommend />
     <MallRank />
     <MallGuessLike />
 
@@ -14,7 +14,7 @@
 <script>
 import { mapState } from "vuex";
 import ListContainer from "@/pages/Home/ListContainer/ListContainer.vue";
-import ReCommend from "@/pages/Home/ReCommend/ReCommend.vue";
+import Recommend from "@/pages/Home/Recommend/Recommend.vue";
 import MallRank from "@/pages/Home/MallRank/MallRank.vue";
 import MallGuessLike from "@/pages/Home/GuessYouLike/MallGuessLike.vue";
 import MallFloor from "@/pages/Home/MallFloor/MallFloor.vue";
@@ -24,7 +24,7 @@ export default {
   name: "MallHome",
   components: {
     ListContainer,
-    ReCommend,
+    Recommend,
     MallRank,
     MallGuessLike,
     MallFloor,

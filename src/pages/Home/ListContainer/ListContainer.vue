@@ -3,26 +3,11 @@
   <div class="list-container">
     <div class="sortList clearfix">
       <div class="center">
+
         <!--banner轮播-->
-        <div class="swiper-container" ref="swiper">
-          <div class="swiper-wrapper">
-            <div
-              class="swiper-slide"
-              v-for="carousel in bannerList"
-              :key="carousel.id"
-            >
-              <img :src="carousel.imgUrl" />
-            </div>
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
+        <Carousel :carouselList="bannerList" />
 
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
       </div>
-
       <div class="right">
         <div class="news">
           <h4>
@@ -98,8 +83,6 @@
 
 <script>
 import { mapState } from "vuex";
-import Swiper from "swiper";
-import "@/../node_modules/swiper/css/swiper.min.css";
 
 export default {
   name: "ListContainer",
@@ -107,38 +90,6 @@ export default {
     ...mapState("home", {
       bannerList: (state) => state.bannerList,
     }),
-  },
-  watch: {
-    bannerList: {
-      deep: true,
-      handler() {
-        // 等待数据更新之后 且 dom 更新完成后执行回调
-        this.$nextTick(() => {
-          //初始化Swiper类的实例
-          new Swiper(this.$refs.swiper, {
-            direction: "horizontal",
-            loop: true,
-            // 如果需要分页器
-            pagination: {
-              el: ".swiper-pagination",
-              type: "bullets",
-              clickable: true,
-            },
-            //自动轮播
-            autoplay: {
-              delay: 1000,
-              stopOnLastSlide: false,
-              disableOnInteraction: false,
-            },
-            // 如果需要前进后退按钮
-            navigation: {
-              prevEl: ".swiper-button-prev",
-              nextEl: ".swiper-button-next",
-            },
-          });
-        });
-      },
-    },
   },
 };
 </script>

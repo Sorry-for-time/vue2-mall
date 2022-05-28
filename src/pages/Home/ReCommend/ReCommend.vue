@@ -28,7 +28,8 @@
 
 <script>
 export default {
-  name: "ReCommend",
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Recommend",
   data() {
     return {};
   },
