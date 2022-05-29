@@ -31,20 +31,15 @@
           <img src="./images/logo.png" alt="" />
         </router-link>
       </h1>
+
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input
-            type="text"
-            id="autocomplete"
-            class="input-error input-xxlarge"
-            v-model="keyword"
-            @keydown.enter.prevent="goSearch"
-          />
-          <button
-            class="sui-btn btn-xlarge btn-danger"
-            type="button"
-            @click="goSearch"
-          >
+          <!-- 搜索输入框 -->
+          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model.trim="keyword"
+            @keydown.enter.prevent="goSearch" />
+
+          <!-- 搜索按钮 -->
+          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
             搜索
           </button>
         </form>
@@ -65,26 +60,28 @@ export default {
     goSearch() {
       // 路由 query 传递参数, 字符串形式
       // this.$router.push(`/search/${this.keyword}/`);
-
       const location = {
         name: "search",
         // 使用 undefined 可以解决路径为空串的情况
         params: { keyword: this.keyword || undefined },
       };
-
       // 如果路径中也包含了 query 参数就跟着传递过去(空对象的情况也传过去)
       if (this.$route.query) {
         location.query = this.$route.query;
       }
-
       this.$router.push(location);
     },
+  },
+  mounted() {
+    this.$bus.$on("clearKeyword", () => {
+      this.keyword = "";
+    })
   },
 };
 </script>
 <style lang="scss" scoped>
 .header {
-  & > .top {
+  &>.top {
     background-color: #eaeaea;
     height: 30px;
     line-height: 30px;
@@ -115,7 +112,7 @@ export default {
         a {
           padding: 0 10px;
 
-          & + a {
+          &+a {
             border-left: 1px solid #b3aeae;
           }
         }
@@ -123,7 +120,7 @@ export default {
     }
   }
 
-  & > .bottom {
+  &>.bottom {
     width: 1200px;
     margin: 0 auto;
     overflow: hidden;

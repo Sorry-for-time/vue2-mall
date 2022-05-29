@@ -6,7 +6,7 @@ import "../../node_modules/nprogress/nprogress.css";
 // 修改加载进度条部分默认样式
 import "@/assets/css/modify-nprogress.css";
 
-const apiLink = "http://gmall-h5-api.atguigu.cn/api"; // 我就不在配置文件中设置代理了(理直气壮.jpg)
+const apiLink = "/api"; // 我就不在配置文件中设置代理了(理直气壮.jpg)
 // 配置基本API路径
 const requestFn = axios.create({
   baseURL: apiLink,

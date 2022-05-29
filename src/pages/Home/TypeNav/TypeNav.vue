@@ -20,13 +20,8 @@
                 为了练习下 js 逻辑, 所以就不用 :hover 来改变背景了
               -->
 
-              <div
-                class="item"
-                v-for="(c1, index) in categoryList"
-                @mouseenter="changeSelectedIndex(index)"
-                :class="{ 'sky-blue-bgc': index === currentSelectIndex }"
-                :key="c1.categoryId"
-              >
+              <div class="item" v-for="(c1, index) in categoryList" @mouseenter="changeSelectedIndex(index)"
+                :class="{ 'sky-blue-bgc': index === currentSelectIndex }" :key="c1.categoryId">
                 <h3>
                   <!-- 通过添加自定义属性给标签进行分类和定位 -->
                   <!-- 要注意属性的大小写转换 -->
@@ -35,43 +30,27 @@
                     https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Howto/Use_data_attributes
                     https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*
                   -->
-                  <a
-                    :data-category-name="c1.categoryName"
-                    :data-category1id="c1.categoryId"
-                  >
+                  <a :data-category-name="c1.categoryName" :data-category1id="c1.categoryId">
                     {{ index + 1 }}.{{ c1.categoryName }}
                   </a>
                 </h3>
 
                 <!-- 二级分类 -->
                 <!-- 通过 :style 动态设置隐藏/显示属性 -->
-                <div
-                  class="item-list clearfix"
-                  :style="{
-                    display: currentSelectIndex === index ? 'block' : 'none',
-                  }"
-                >
-                  <div
-                    class="subitem"
-                    v-for="c2 in c1.categoryChild"
-                    :key="c2.categoryId"
-                  >
+                <div class="item-list clearfix" :style="{
+                  display: currentSelectIndex === index ? 'block' : 'none',
+                }">
+                  <div class="subitem" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
                     <dl class="fore">
                       <dt>
-                        <a
-                          :data-category-name="c2.categoryName"
-                          :data-category2id="c2.categoryId"
-                        >
+                        <a :data-category-name="c2.categoryName" :data-category2id="c2.categoryId">
                           {{ c2.categoryName }}
                         </a>
                       </dt>
                       <dd>
                         <!-- 三级分类 -->
                         <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
-                          <a
-                            :data-category-name="c3.categoryName"
-                            :data-category3id="c3.categoryId"
-                          >
+                          <a :data-category-name="c3.categoryName" :data-category3id="c3.categoryId">
                             {{ c3.categoryName }}
                           </a>
                         </em>
@@ -327,10 +306,12 @@ export default {
     .sort-enter-active {
       transform-origin: top center;
       animation: show-category 200ms ease-out;
+
       @keyframes show-category {
         from {
           transform: scale(0);
         }
+
         to {
           transform: scale(1);
         }

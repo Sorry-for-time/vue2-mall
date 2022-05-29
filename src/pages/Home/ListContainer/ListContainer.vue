@@ -177,111 +177,48 @@ export default {
             display: block;
           }
 
-          &:nth-child(1) {
-            .list-item {
-              background-position: 0px -5px;
-            }
-          }
+          // 这里使用 数组 + 遍历的方式替换原来的方式
+          $item-units: (
+            (0px, -5px),
+            (-62px, -5px),
+            (-126px, -5px),
+            (-190px, -5px),
+            (0px, -76px),
+            (-62px, -76px),
+            (-126px, -76px),
+            (-190px, -76px),
+            (0px, -146px),
+            (-62px, -146px),
+            (-126px, -146px),
+            (-190px, -146px)
+          );
 
-          &:nth-child(2) {
-            .list-item {
-              background-position: -62px -5px;
-            }
-          }
+        @each $value in $item-units {
+          $index: index($item-units, $value);
 
-          &:nth-child(3) {
+          &:nth-child(#{$index}) {
             .list-item {
-              background-position: -126px -5px;
-            }
-          }
-
-          &:nth-child(4) {
-            .list-item {
-              background-position: -190px -5px;
-            }
-          }
-
-          &:nth-child(5) {
-            .list-item {
-              background-position: 0px -76px;
-            }
-          }
-
-          &:nth-child(6) {
-            .list-item {
-              background-position: -62px -76px;
-            }
-          }
-
-          &:nth-child(7) {
-            .list-item {
-              background-position: -126px -76px;
-            }
-          }
-
-          &:nth-child(8) {
-            .list-item {
-              background-position: -190px -76px;
-            }
-          }
-
-          &:nth-child(9) {
-            .list-item {
-              background-position: 0px -146px;
-            }
-          }
-
-          &:nth-child(10) {
-            .list-item {
-              background-position: -62px -146px;
-            }
-          }
-
-          &:nth-child(11) {
-            .list-item {
-              background-position: -126px -146px;
-            }
-          }
-
-          &:nth-child(12) {
-            .list-item {
-              background-position: -190px -146px;
+              background-position: #{nth($value, 1)} #{nth($value, 2)};
             }
           }
         }
       }
+    }
 
-      .ads {
-        margin-top: 5px;
+    .ads {
+      margin-top: 5px;
 
-        img {
-          opacity: 0.8;
-          transition: all 400ms;
+      img {
+        opacity: 0.8;
+        transition: all 400ms;
 
-          &:hover {
-            opacity: 1;
-          }
+        &:hover {
+          opacity: 1;
         }
       }
     }
   }
 }
+}
 </style>
 
-<!-- <style lang="scss">
-// 这里用 sass 的数组和循环来简化下原教程写了10几个的 item 样式单位配置
-$item-units: (
-  (0px, -5px),
-  (-62px, -5px),
-  (-126px, -5px),
-  (-190px, -5px),
-  (0px, -76px),
-  (-62px, -76px),
-  (-126px, -76px),
-  (-190px, -76px),
-  (0px, -146px),
-  (-62px, -146px),
-  (-126px, -146px),
-  (-190px, -146px)
-);
-</style> -->
