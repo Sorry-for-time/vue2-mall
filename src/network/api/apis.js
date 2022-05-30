@@ -24,5 +24,5 @@ export function requestSearchInfo(params) {
 
 // 获取产品详情信息
 export function requestGoodDetail(id) {
-  return requestFn.get(`/item${id}`);
+  return requestFn.get(`/item/${id}`);
 }

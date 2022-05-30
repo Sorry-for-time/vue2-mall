@@ -7,31 +7,32 @@
     <section class="con">
       <!-- 导航路径区域 -->
       <div class="conPoin">
-        <span>手机、数码、通讯</span>
-        <span>手机</span>
-        <span>Apple苹果</span>
-        <span>iphone 6S系类</span>
+        <span v-show="categoryView.category1Name">{{ categoryView.category1Name }}</span>
+        <span v-show="categoryView.category2Name">{{ categoryView.category2Name }}</span>
+        <span v-show="categoryView.category3Name">{{ categoryView.category3Name }}</span>
       </div>
       <!-- 主要内容区域 -->
       <div class="mainCon">
         <!-- 左侧放大镜区域 -->
         <div class="previewWrap">
-          <!--放大镜效果-->
-          <Zoom />
+          <!--放大镜效果, 且如果异步数据请求还没完成的话就传一个数组套空对象, 帽子戏法再次++-->
+          <Zoom :skuImageList="skuInfo.skuImageList || [{}]" />
+
           <!-- 小图列表 -->
-          <ImageList />
+          <ImageList :skuImageList="skuInfo.skuImageList || [{}]" />
         </div>
+
         <!-- 右侧选择区域布局 -->
         <div class="InfoWrap">
           <div class="goodsDetail">
-            <h3 class="InfoName">Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机</h3>
-            <p class="news">推荐选择下方[移动优惠购],手机套餐齐搞定,不用换号,每月还有花费返</p>
+            <h3 class="InfoName">{{ skuInfo.skuName }}</h3>
+            <p class="news">{{ skuInfo.skuDesc }}</p>
             <div class="priceArea">
               <div class="priceArea1">
                 <div class="title">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</div>
                 <div class="price">
                   <i>¥</i>
-                  <em>5299</em>
+                  <em>{{ skuInfo.price }}</em>
                   <span>降价通知</span>
                 </div>
                 <div class="remark">
@@ -104,7 +105,7 @@
       </div>
     </section>
 
-    <!-- 内容详情页 -->
+    <!-- 内容详情页, 仅仅只是测试数据, 不会更改, 可以不用在意(高情商说法) -->
     <section class="product-detail">
       <aside class="aside">
         <div class="tabWraped">
@@ -347,6 +348,8 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex';
+
 import ImageList from './ImageList/ImageList'
 import Zoom from './Zoom/Zoom'
 
@@ -356,6 +359,16 @@ export default {
   components: {
     ImageList,
     Zoom
+  },
+
+  computed: {
+    ...mapState("detail", { goodDetail: state => state.goodDetail }),
+    ...mapGetters("detail", ["categoryView", "skuInfo"]),
+  },
+
+  mounted() {
+    // 取得数据
+    this.$store.dispatch("detail/getGoodDetail", this.$route.params.skuId);
   }
 }
 </script>

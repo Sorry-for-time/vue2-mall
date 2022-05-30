@@ -4,7 +4,19 @@ const state = {
   goodDetail: {},
 };
 
-const getters = {};
+const getters = {
+  // 导航路径分类
+  categoryView(state) {
+    // 如果异步数据还没返回的话(此时组件读取到的是 undefined )那就先返回一个空对象防止组件读取数据报错(帽子戏法++)
+    return state.goodDetail.categoryView || {};
+  },
+
+  // 产品的主要信息
+  skuInfo(state) {
+    // 如果异步数据还没返回的话(此时组件读取到的是 undefined )那就先返回一个空对象防止组件读取数据报错(帽子戏法++)
+    return state.goodDetail.skuInfo || {};
+  },
+};
 
 const actions = {
   // 获取产品信息

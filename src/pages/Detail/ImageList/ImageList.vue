@@ -1,8 +1,9 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="../images/s1.png">
+      <!-- 每一张的图片 -->
+      <div class="swiper-slide" v-for="(item) in skuImageList" :key="item.id">
+        <img :src="item.imgUrl" alt="图片貌似没有加载出来??">
       </div>
     </div>
     <div class="swiper-button-next"></div>
@@ -14,6 +15,7 @@
 
 export default {
   name: "ImageList",
+  props: ["skuImageList"],
 }
 </script>
 
