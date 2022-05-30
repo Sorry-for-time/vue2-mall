@@ -5,6 +5,7 @@ Vue.use(vuex);
 
 import { home } from "@/store/children/home/home.js";
 import { search } from "@/store/children/search/search.js";
+import { detail } from "@/store/children/detail/detail.js";
 
 export const store = new vuex.Store({
   /**
@@ -16,5 +17,6 @@ export const store = new vuex.Store({
   modules: {
     home,
     search,
+    detail,
   },
 });

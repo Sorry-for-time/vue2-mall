@@ -1,23 +1,21 @@
 <template>
   <!-- 分页器 -->
   <div class="pagination">
-    <button>上一页</button>
-    <button>1</button>
-    <button>···</button>
+    <button v-show="!(pageNo === 1)" @click="selectPageNo(pageNo - 1)">上一页</button>
+    <button v-if="startAndEndNum.start > 1" @click="selectPageNo(1)">1</button>
+    <button disabled v-if="startAndEndNum.start > 2">...</button>
 
-    <button>3</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>7</button>
+    <button v-for="(index) in pageList" :key="index" :class="{ active: index === pageNo }" :disabled="index === pageNo"
+      @click="selectPageNo(index)">
+      {{ index }}
+    </button>
 
-    <button>···</button>
-    <button>9</button>
-    <button>下一页</button>
-
-    <button style="margin-left: 30px">共 60 条</button>
+    <button disabled v-if="startAndEndNum.end < totalPage - 1">...</button>
+    <button v-if="startAndEndNum.end < totalPage">{{ totalPage }}</button>
+    <button v-show="!(pageNo === totalPage)" @click="selectPageNo(pageNo + 1)">下一页</button>
+    <button>总页数{{ totalPage }}</button>
+    <button style="margin-left: 30px">共 {{ total }} 条</button>
   </div>
-
 </template>
 
 <script>
@@ -28,12 +26,56 @@ export default {
   data() {
     return {};
   },
+  props: ["pageNo", "pageSize", "total", "continues"],
 
   components: {},
 
-  methods: {},
+  methods: {
+    selectPageNo(pageNo) {
+      this.$emit("getPageNo", pageNo);
+    }
+  },
 
-  computed: {},
+  computed: {
+    // 总页数
+    totalPage() {
+      return Math.ceil(this.total / this.pageSize);
+    },
+
+    // 计算分页的范围
+    startAndEndNum() {
+      let start = 0, end = 0;
+      const { pageNo, continues } = this;
+
+      if (this.totalPage < continues) {
+        start = 1;
+        end = this.totalPage;
+      } else {
+        start = pageNo - parseInt(continues / 2);
+        end = pageNo + parseInt(continues / 2);
+        // 如过起始点小于1的情况下(即 pageNo 刚好在前几页起始页上)
+        if (start < 1) {
+          start = 1;
+          end = continues;
+        }
+        // 结束页超过实际页的情况
+        if (end > this.totalPage) {
+          end = this.totalPage;
+          start = this.totalPage - continues + 1; // 将其实页往前移动以满足要求
+        }
+      }
+      return { start, end };
+    },
+
+    // 通过分页范围生成所需的页码数组
+    pageList() {
+      const realList = [];
+      for (let index = this.startAndEndNum.start; index <= this.startAndEndNum.end; index++) {
+        realList.push(index);
+      }
+      return realList;
+    }
+  },
 }
 </script>
 

@@ -85,10 +85,10 @@
                 <div class="list-wrap">
 
                   <div class="p-img">
-                    <!-- 商品图片 -->
-                    <a href="item.html" target="_blank">
-                      <img :src="good.defaultImg" alt="图片貌似没有加载出来???" />
-                    </a>
+                    <router-link :to="`/detail/${good.id}`">
+                      <!-- 商品图片 -->
+                      <img :src="good.defaultImg" alt="图片貌似没有加载出来🙃" />
+                    </router-link>
                   </div>
 
                   <div class="price">
@@ -121,7 +121,9 @@
           </div>
 
           <!-- 分页器 -->
-          <Pagination />
+          <!--        当前选择页,  每页显示多少数据, 总记录数,  连续显示几页 -->
+          <Pagination :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :total="total" :continues="5"
+            @getPageNo="getPageNo" />
         </div>
       </div>
     </div>
@@ -130,7 +132,7 @@
 
 <script>
 import SearchSelector from "./SearchSelector/SearchSelector.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "MallSearch",
@@ -144,8 +146,8 @@ export default {
         categoryName: "",       /* 品类名 */
         keyword: "",            /* 关键字 */
         order: "1:desc",        /* 排序方式, 默认为综合降序 */
-        pageNo: "1",            /* 页码 */
-        pageSize: "10",         /* 每页数量 */
+        pageNo: 1,            /* 页码 */
+        pageSize: 10,         /* 每页数量 */
         props: [],              /* 商品属性的搜索条件 */
         trademark: "",          /* 品牌的搜索条件 */
       }
@@ -225,6 +227,12 @@ export default {
       const arrowForward = this.searchParams.order.split(":");
       // 改变升降序
       arrowForward[1] === "desc" ? this.searchParams.order = `${arrowForward[0]}:asc` : this.searchParams.order = `${arrowForward[0]}:desc`;
+    },
+
+    // 跳转到指定页码
+    getPageNo(pageNo) {
+      this.searchParams.pageNo = pageNo;
+      this.getData()
     }
   },
 
@@ -249,8 +257,14 @@ export default {
   },
 
   computed: {
-    // 映射 search/goodList
+    /**
+     * @description 映射 search/goodList
+     */
     ...mapGetters("search", ["goodsList"]),
+
+    ...mapState("search", {
+      total: state => state.searchList.total
+    }),
 
     /**
      * @description 目前商品的排序方式是否是通过综合排序
@@ -260,7 +274,10 @@ export default {
       return this.searchParams.order.indexOf('1') !== -1
     },
 
-    // 判断箭头方向是否为上
+    /**
+     * @description 判断箭头朝向
+     * @returns {boolean} true: 箭头朝上, false: 箭头朝下
+     */
     isArrowTop() {
       return this.searchParams.order.split(':').indexOf('asc') !== -1;
     }

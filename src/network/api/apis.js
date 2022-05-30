@@ -21,3 +21,8 @@ export const requestFloorList = () => {
 export function requestSearchInfo(params) {
   return requestFn.post("/list", params);
 }
+
+// 获取产品详情信息
+export function requestGoodDetail(id) {
+  return requestFn.get(`/item${id}`);
+}
