@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import MallHeader from "./components/header/MallHeader.vue";
-import MallFooter from "./components/footer/MallFooter.vue";
+import MallHeader from "@/components/header/MallHeader.vue";
+import MallFooter from "@/components/footer/MallFooter.vue";
 
 export default {
   name: "App",
