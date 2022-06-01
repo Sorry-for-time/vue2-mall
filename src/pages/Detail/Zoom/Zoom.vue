@@ -1,11 +1,13 @@
 <template>
   <div class="spec-preview">
     <img :src="skuImageList[needShowIndex].imgUrl" />
-    <div class="event"></div>
-    <div class="big">
-      <img :src="skuImageList[needShowIndex].imgUrl" />
+    <!-- 传递鼠标的实时位置 -->
+    <div class="event" @mousemove="moveHandler($event)"></div>
+    <!-- 放大镜区域 -->
+    <div class="big" fa-refresh>
+      <img :src="skuImageList[needShowIndex].imgUrl" ref="bigShow" />
     </div>
-    <div class="mask"></div>
+    <div class="mask" ref="mask"></div>
   </div>
 </template>
 
@@ -17,15 +19,47 @@ export default {
   data() {
     return {
       // 当前要展示的大图的索引值
-      needShowIndex: 0
+      needShowIndex: 0,
+      mask: null,
+      bigShow: null,
     }
+  },
+
+  methods: {
+    moveHandler(event) {
+      const mask = this.mask;
+      const bigShow = this.bigShow;
+
+      let left = event.offsetX - mask.offsetWidth / 2, top = event.offsetY - mask.offsetHeight / 2;
+      // 边界判断, 防止超出
+      if (left <= 0) {
+        left = 0;
+      }
+      if (left >= mask.offsetWidth) {
+        left = mask.offsetWidth
+      }
+      if (top <= 0) {
+        top = 0;
+      }
+      if (top >= mask.offsetHeight) {
+        top = mask.offsetHeight;
+      }
+      mask.style.left = `${left}px`;
+      mask.style.top = `${top}px`;
+
+      bigShow.style.left = `${-2 * left}px`;
+      bigShow.style.top = `${-2 * top}px`;
+    },
   },
 
   mounted() {
     // 接收兄弟组件传递的修改信息
     this.$bus.$on("changeShowIndex", (index) => {
       this.needShowIndex = index;
-    })
+    });
+
+    this.mask = this.$refs.mask;
+    this.bigShow = this.$refs.bigShow;
   }
 }
 </script>
