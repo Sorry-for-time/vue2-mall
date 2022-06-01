@@ -11,11 +11,12 @@
         <span v-show="categoryView.category2Name">{{ categoryView.category2Name }}</span>
         <span v-show="categoryView.category3Name">{{ categoryView.category3Name }}</span>
       </div>
+
       <!-- 主要内容区域 -->
       <div class="mainCon">
         <!-- 左侧放大镜区域 -->
         <div class="previewWrap">
-          <!--放大镜效果, 且如果异步数据请求还没完成的话就传一个数组套空对象, 帽子戏法再次++-->
+          <!--放大镜效果, 且如果异步数据请求还没完成的话就传一个数组套空对象, 帽子戏法再次++ -->
           <Zoom :skuImageList="skuInfo.skuImageList || [{}]" />
 
           <!-- 小图列表 -->
@@ -66,13 +67,21 @@
           <div class="choose">
             <div class="chooseArea">
               <div class="choosed"></div>
+              <!-- 产品售卖属性列表 -->
               <dl v-for="(spuSaleAttr) in spuSaleAttrList" :key="spuSaleAttr.id">
+                <!-- 属性依据分类 -->
                 <dt class="title">{{ spuSaleAttr.saleAttrName }}</dt>
-                <dd changepirce="0" :class="{ active: spuSaleAttrValue.isChecked == '1' }"
-                  v-for="(spuSaleAttrValue) in spuSaleAttr.spuSaleAttrValueList" :key="spuSaleAttrValue.id">
-                  {{ spuSaleAttrValue.saleAttrValueName }}</dd>
+
+                <!-- 对应属性名称 , 且设置默认勾选项-->
+                <!-- 绑定单击回调通过排他操作设置单独属性高亮 -->
+                <dd changepirce="0" :class="{ active: spuSaleAttrValue.isChecked === '1' }"
+                  v-for="(spuSaleAttrValue) in spuSaleAttr.spuSaleAttrValueList" :key="spuSaleAttrValue.id"
+                  @click="changeActive(spuSaleAttrValue, spuSaleAttr.spuSaleAttrValueList)">
+                  {{ spuSaleAttrValue.saleAttrValueName }}
+                </dd>
               </dl>
             </div>
+
             <div class="cartWrap">
               <div class="controls">
                 <input autocomplete="off" class="itxt">
@@ -342,6 +351,18 @@ export default {
   components: {
     ImageList,
     Zoom
+  },
+
+  methods: {
+    /**
+     * @description 排他设置高亮, 且因为对比原版我将 vuex 配置设置了严格模式, 所以需要严格通过 dispatch, commit 操作来改数据
+     * @param {*} spuSaleAttrValue 当前点击的选项
+     * @param {*} spuSaleAttrValueList 点击选元素所在的数组
+     */
+    changeActive(spuSaleAttrValue, spuSaleAttrValueList) {
+      // 派发事件修改数据
+      this.$store.dispatch("detail/changeActive", { spuSaleAttrValue, spuSaleAttrValueList });
+    }
   },
 
   computed: {

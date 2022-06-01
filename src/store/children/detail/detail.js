@@ -30,11 +30,24 @@ const actions = {
       context.commit("GET_GOOD_DETAIL", result.data);
     }
   },
+
+  changeActive(context, payload) {
+    context.commit("CHANGE_ACTIVE", payload);
+  },
 };
 
 const mutations = {
   GET_GOOD_DETAIL(state, payload) {
     state.goodDetail = payload;
+  },
+
+  CHANGE_ACTIVE(_state, payload) {
+    // 全部属性先移除掉样式绑定
+    payload.spuSaleAttrValueList.forEach((element) => {
+      element.isChecked = "0";
+    });
+    // 对点击的选项添加样式绑定
+    payload.spuSaleAttrValue.isChecked = "1";
   },
 };
 
