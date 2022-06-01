@@ -1,9 +1,10 @@
 <template>
-  <div class="swiper-container">
+  <div class="swiper-container" ref="carouselMounter">
     <div class="swiper-wrapper">
       <!-- 每一张的图片 -->
-      <div class="swiper-slide" v-for="(item) in skuImageList" :key="item.id">
-        <img :src="item.imgUrl" alt="图片貌似没有加载出来??">
+      <div class="swiper-slide" v-for="(item, index) in skuImageList" :key="item.id">
+        <img :src="item.imgUrl" alt="图片貌似没有加载出来??" :class="{ active: index === currentImgActiveIndex }"
+          @click="changeActive(index)">
       </div>
     </div>
     <div class="swiper-button-next"></div>
@@ -12,10 +13,47 @@
 </template>
 
 <script>
+import Swiper from 'swiper';
+import "@/../node_modules/swiper/css/swiper.min.css";
 
 export default {
   name: "ImageList",
   props: ["skuImageList"],
+  data() {
+    return {
+      currentImgActiveIndex: 0
+    }
+  },
+  methods: {
+    changeActive(index) {
+      this.currentImgActiveIndex = index;
+      // 通知兄弟组件更改展示的大图数据
+      this.$bus.$emit("changeShowIndex", index);
+    }
+  },
+
+  watch: {
+    // 监测 props 更改
+    skuImageList: {
+      deep: true,
+      handler() {
+        this.$nextTick(() => {
+          console.log("233");
+          new Swiper(this.$refs.carouselMounter, {
+            loop: false,
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev"
+            },
+            // 设置同时展示个数(简单官网的配置CV下)
+            slidesPerView: 3,
+            // 每次滚动的图片数量
+            slidesPerGroup: 1 /* 算了还是一张, 教程接口提供的图片不多 */
+          })
+        });
+      }
+    }
+  }
 }
 </script>
 
@@ -40,11 +78,6 @@ export default {
       display: block;
 
       &.active {
-        border: 2px solid #f60;
-        padding: 1px;
-      }
-
-      &:hover {
         border: 2px solid #f60;
         padding: 1px;
       }

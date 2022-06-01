@@ -1,9 +1,9 @@
 <template>
   <div class="spec-preview">
-    <img :src="skuImageList[0].imgUrl" />
+    <img :src="skuImageList[needShowIndex].imgUrl" />
     <div class="event"></div>
     <div class="big">
-      <img :src="skuImageList[0].imgUrl" />
+      <img :src="skuImageList[needShowIndex].imgUrl" />
     </div>
     <div class="mask"></div>
   </div>
@@ -13,7 +13,20 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Zoom",
-  props: ["skuImageList"]
+  props: ["skuImageList"],
+  data() {
+    return {
+      // 当前要展示的大图的索引值
+      needShowIndex: 0
+    }
+  },
+
+  mounted() {
+    // 接收兄弟组件传递的修改信息
+    this.$bus.$on("changeShowIndex", (index) => {
+      this.needShowIndex = index;
+    })
+  }
 }
 </script>
 
