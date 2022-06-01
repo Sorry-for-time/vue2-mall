@@ -11,7 +11,7 @@ import "@/assets/css/modify-nprogress.css";
 const apiLink = "/mock";
 const mockApi = axios.create({
   baseURL: apiLink,
-  timeout: 5000,
+  timeout: 10000,
 });
 
 mockApi.interceptors.request.use((config) => {

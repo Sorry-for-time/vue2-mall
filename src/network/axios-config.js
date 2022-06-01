@@ -10,7 +10,7 @@ const apiLink = "/api"; // 我就不在配置文件中设置代理了(理直气�
 // 配置基本API路径
 const requestFn = axios.create({
   baseURL: apiLink,
-  timeout: 5000, // 请求超时
+  timeout: 10000, // 请求超时
 });
 
 // 请求拦截器

@@ -21,7 +21,7 @@ export default {
   props: ["skuImageList"],
   data() {
     return {
-      currentImgActiveIndex: 0
+      currentImgActiveIndex: 0,
     }
   },
   methods: {
@@ -38,7 +38,6 @@ export default {
       deep: true,
       handler() {
         this.$nextTick(() => {
-          console.log("233");
           new Swiper(this.$refs.carouselMounter, {
             loop: false,
             navigation: {

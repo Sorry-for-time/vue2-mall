@@ -84,10 +84,11 @@
 
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt">
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input autocomplete="off" v-model.number="skuNum" @change="changeSkuNum($event)" class="itxt">
+                <a href="javascript:" class="plus" @click="++skuNum">+</a>
+                <a href="javascript:" class="mins" @click="skuNum > 1 ? --skuNum : skuNum = 1">-</a>
               </div>
+
               <div class="add">
                 <a href="javascript:">加入购物车</a>
               </div>
@@ -347,10 +348,14 @@ import Zoom from './Zoom/Zoom'
 
 export default {
   name: 'GoodDetail',
-
   components: {
     ImageList,
     Zoom
+  },
+  data() {
+    return {
+      skuNum: 1, /* 产品默认购买个数 */
+    }
   },
 
   methods: {
@@ -362,6 +367,15 @@ export default {
     changeActive(spuSaleAttrValue, spuSaleAttrValueList) {
       // 派发事件修改数据
       this.$store.dispatch("detail/changeActive", { spuSaleAttrValue, spuSaleAttrValueList });
+    },
+    changeSkuNum(event) {
+      const value = event.target.value;
+      // 非法情况判断
+      if (isNaN(value) || value < 1) {
+        this.skuNum = 1
+      } else {
+        this.skuNum = parseInt(value); // 取整
+      }
     }
   },
 
