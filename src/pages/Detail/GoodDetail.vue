@@ -90,7 +90,7 @@
               </div>
 
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <a href="javascript:" @click="addToShopCar">加入购物车</a>
               </div>
             </div>
           </div>
@@ -368,6 +368,8 @@ export default {
       // 派发事件修改数据
       this.$store.dispatch("detail/changeActive", { spuSaleAttrValue, spuSaleAttrValueList });
     },
+
+    // 更改购买数量
     changeSkuNum(event) {
       const value = event.target.value;
       // 非法情况判断
@@ -376,12 +378,40 @@ export default {
       } else {
         this.skuNum = parseInt(value); // 取整
       }
+    },
+
+    // 加入购物车
+    addToShopCar() {
+      this.$store.dispatch(
+        "detail/addOrUpdateShopCart", { skuId: this.$route.params.skuId, skuNum: this.skuNum })
+        .then(
+          // 成功的情况跳转到购物车页面
+          () => {
+            // 路由跳转
+            this.$router.push({
+              name: "addCartSuccess",
+              query: {
+                skuNum: this.skuNum // 将购买数量传递过去
+              }
+            });
+            // 将当前加入购物车的产品信息保存到 sessionStorage 中
+            sessionStorage.setItem("skuInfo", JSON.stringify(this.skuInfo));
+          },
+          // 失败的情况
+          fail => {
+            alert(fail)
+          });
     }
   },
 
   computed: {
     ...mapState("detail", { goodDetail: state => state.goodDetail }),
-    ...mapGetters("detail", ["categoryView", "skuInfo", "spuSaleAttrList"]),
+
+    ...mapGetters("detail", [
+      "categoryView",
+      "skuInfo",
+      "spuSaleAttrList"]
+    ),
   },
 
   mounted() {

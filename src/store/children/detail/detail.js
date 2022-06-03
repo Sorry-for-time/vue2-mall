@@ -1,7 +1,12 @@
-import { requestGoodDetail } from "@/network/api/apis";
+import { requestGoodDetail, requestUpdateShopCart } from "@/network/api/apis";
+import { getOrSetUUID } from "@/utils/uuid_token.js";
 
 const state = {
+  // 商品信息
   goodDetail: {},
+
+  // 用户身份
+  userUUID: getOrSetUUID("uuid_token"), // 生成一个 UUID(默认从 localStorage 中取出, 没有的话就新生成一个)
 };
 
 const getters = {
@@ -31,8 +36,19 @@ const actions = {
     }
   },
 
+  // 更改当前属性选中项
   changeActive(context, payload) {
     context.commit("CHANGE_ACTIVE", payload);
+  },
+
+  // 添加到购物车或者更新购物车
+  async addOrUpdateShopCart(_context, { skuId, skuNum }) {
+    const result = await requestUpdateShopCart(skuId, skuNum);
+    if (result.code.toString() === "200") {
+      return result; // 响应成功的状态
+    } else {
+      return Promise.reject(new Error("Fail")); // 响应失败的情况
+    }
   },
 };
 

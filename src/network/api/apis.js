@@ -26,3 +26,23 @@ export function requestSearchInfo(params) {
 export function requestGoodDetail(id) {
   return requestFn.get(`/item/${id}`);
 }
+
+// 将产品添加到购物车当中
+export function requestUpdateShopCart(skuId, skuNum) {
+  return requestFn.post(`/cart/addToCart/${skuId}/${skuNum}`);
+}
+
+// 获取购物车数据
+export function requestShopCartList() {
+  return requestFn.get("/cart/cartList");
+}
+
+// 删除购物车产品
+export function requestDeleteCartById(id) {
+  return requestFn.delete(`/cart/deleteCart/${id}`);
+}
+
+// 修改商品选中状态
+export function requestUpdateCartCheckedStatus(skuId, isChecked) {
+  return requestFn.get(`/cart/checkCart/${skuId}/${isChecked}`);
+}

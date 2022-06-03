@@ -1,6 +1,8 @@
 import axios from "axios";
 import nprogress from "nprogress";
 
+import { detail } from "@/store/children/detail/detail.js"; // 取得 UUID 模块中定义的 UUID
+
 // 引入加载进度条样式
 import "../../node_modules/nprogress/nprogress.css";
 // 修改加载进度条部分默认样式
@@ -16,6 +18,12 @@ const requestFn = axios.create({
 // 请求拦截器
 requestFn.interceptors.request.use((config) => {
   nprogress.start(); // 进度条开始
+
+  // 为请求响应头设置临时唯一标识
+  const userTempId = detail.state.userUUID;
+  if (detail.state.userUUID) {
+    config.headers.userTempId = userTempId;
+  }
   return config;
 });
 
