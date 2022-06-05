@@ -60,43 +60,10 @@
       </div>
       <div class="copyright">
         <ul class="helpLink">
-          <li>
-            关于我们
+          <li v-for="(item, index) in helpDetail" :key="index">
+            {{ item }}
             <span class="space"></span>
           </li>
-          <li>
-            联系我们
-            <span class="space"></span>
-          </li>
-          <li>
-            关于我们
-            <span class="space"></span>
-          </li>
-          <li>
-            商家入驻
-            <span class="space"></span>
-          </li>
-          <li>
-            营销中心
-            <span class="space"></span>
-          </li>
-          <li>
-            友情链接
-            <span class="space"></span>
-          </li>
-          <li>
-            关于我们
-            <span class="space"></span>
-          </li>
-          <li>
-            营销中心
-            <span class="space"></span>
-          </li>
-          <li>
-            友情链接
-            <span class="space"></span>
-          </li>
-          <li>关于我们</li>
         </ul>
         <p>地址：北京市昌平区宏福科技园综合楼6层</p>
         <p>京ICP备19006430号</p>
@@ -108,6 +75,11 @@
 <script>
 export default {
   name: "MallFooter",
+  data() {
+    return {
+      helpDetail: ["关于我们", "联系我们", "商家入驻", "营销中心", "友情链接"],
+    };
+  },
 };
 </script>
 
@@ -162,6 +134,12 @@ export default {
             height: 13px;
             background: #666;
             margin: 8px 10px;
+          }
+
+          &:last-child {
+            .space {
+              border-left: none;
+            }
           }
         }
       }

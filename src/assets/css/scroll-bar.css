@@ -1,13 +1,14 @@
 ::-webkit-scrollbar {
-  width: 8px;
-  border: 1px solid hsla(0, 0%, 29%, 0.301);
+  width: 10px;
+  border: 1px solid hsla(41, 35%, 33%, 0.301);
   border-right: none;
   border-bottom: none;
   border-top: none;
   box-sizing: content-box;
+  background-color: antiquewhite;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(0, 0%, 57%);
-  border-radius: 4px;
+  background: scroll center
+    linear-gradient(60deg, hsl(212, 81%, 71%) 20%, hsl(180, 100%, 50%) 80%, hsl(235, 100%, 78%) 100%);
 }
