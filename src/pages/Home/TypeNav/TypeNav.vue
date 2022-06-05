@@ -19,9 +19,13 @@
                 一级分类
                 为了练习下 js 逻辑, 所以就不用 :hover 来改变背景了
               -->
-
-              <div class="item" v-for="(c1, index) in categoryList" @mouseenter="changeSelectedIndex(index)"
-                :class="{ 'sky-blue-bgc': index === currentSelectIndex }" :key="c1.categoryId">
+              <div
+                class="item"
+                v-for="(c1, index) in categoryList"
+                @mouseenter="changeSelectedIndex(index)"
+                :class="{ 'sky-blue-bgc': index === currentSelectIndex }"
+                :key="c1.categoryId"
+              >
                 <h3>
                   <!-- 通过添加自定义属性给标签进行分类和定位 -->
                   <!-- 要注意属性的大小写转换 -->
@@ -37,9 +41,12 @@
 
                 <!-- 二级分类 -->
                 <!-- 通过 :style 动态设置隐藏/显示属性 -->
-                <div class="item-list clearfix" :style="{
-                  display: currentSelectIndex === index ? 'block' : 'none',
-                }">
+                <div
+                  class="item-list clearfix"
+                  :style="{
+                    display: currentSelectIndex === index ? 'block' : 'none',
+                  }"
+                >
                   <div class="subitem" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
                     <dl class="fore">
                       <dt>
@@ -117,8 +124,7 @@ export default {
     // 路由跳转
     goSearch(event) {
       // 通过节点的 dataset 能取得节点的自定义属性, 且为驼峰命名方式, 这里使用对象结构来进行值提取
-      const { categoryName, category1id, category2id, category3id } =
-        event.target.dataset;
+      const { categoryName, category1id, category2id, category3id } = event.target.dataset;
       // 根据不同的情况进行路由信息判断
       if (categoryName) {
         const packingData = { name: "search" };

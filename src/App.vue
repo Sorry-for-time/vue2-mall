@@ -4,7 +4,9 @@
     <MallHeader />
 
     <!-- 路由组件视图 -->
-    <router-view />
+    <router-view>
+      <KeepAlive />
+    </router-view>
 
     <!-- 页尾 -->
     <MallFooter v-show="$route.meta.show" />
@@ -12,8 +14,8 @@
 </template>
 
 <script>
-import MallHeader from "@/components/header/MallHeader.vue";
-import MallFooter from "@/components/footer/MallFooter.vue";
+const MallHeader = () => import("@/components/header/MallHeader.vue");
+const MallFooter = () => import("@/components/footer/MallFooter.vue");
 
 export default {
   name: "App",
@@ -21,7 +23,6 @@ export default {
   mounted() {
     // 在跟组件请求视图默认页视图数据(只请求一次), 减少页面切换带来的数据重复请求
     this.$store.dispatch("home/categoryList");
-
     // 获取 mock 模拟的数据
     this.$store.dispatch("home/getBannerList");
     this.$store.dispatch("home/getFloorList");

@@ -2,20 +2,20 @@ import { requestFn } from "@/network/axios-config.js";
 import { mockApi } from "@/network/mock-api-service.js";
 
 // 三级联动
-export const requestCategoryList = () => {
+export function requestCategoryList() {
   // 返回 Promise 封装对象
   return requestFn.get("/product/getBaseCategoryList");
-};
+}
 
 // mock 提供的 banner 数据
-export const requestBannerList = () => {
+export function requestBannerList() {
   return mockApi.get("/banner");
-};
+}
 
 // mock 提供的 floors 数据
-export const requestFloorList = () => {
+export function requestFloorList() {
   return mockApi.get("/floors");
-};
+}
 
 // 取得搜索数据
 export function requestSearchInfo(params) {
@@ -45,4 +45,24 @@ export function requestDeleteCartById(id) {
 // 修改商品选中状态
 export function requestUpdateCartCheckedStatus(skuId, isChecked) {
   return requestFn.get(`/cart/checkCart/${skuId}/${isChecked}`);
+}
+
+// 获取验证码
+export function requestVerifyCode(phone) {
+  return requestFn.get(`/user/passport/sendCode/${phone}`);
+}
+
+// 注册用户
+export function requestSignUp(params) {
+  return requestFn.post(`/user/passport/register`, params);
+}
+
+// 登录
+export function requestLogin(params) {
+  return requestFn.post("/user/passport/login", params);
+}
+
+// 获取用户信息(需要在 header 中设置好 token)
+export function requestUserInfo() {
+  return requestFn.get("user/passport/auth/getUserInfo");
 }

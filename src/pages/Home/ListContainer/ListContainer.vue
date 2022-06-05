@@ -3,10 +3,8 @@
   <div class="list-container">
     <div class="sortList clearfix">
       <div class="center">
-
         <!--banner轮播-->
         <Carousel :carouselList="bannerList" />
-
       </div>
       <div class="right">
         <div class="news">
@@ -165,7 +163,7 @@ export default {
           width: 25%;
 
           .list-item {
-            background-image: url(./images/icons.png);
+            background-image: url(@/assets/images/icons.png);
             width: 61px;
             height: 40px;
             display: block;
@@ -193,32 +191,31 @@ export default {
             (-190px, -146px)
           );
 
-        @each $value in $item-units {
-          $index: index($item-units, $value);
+          @each $value in $item-units {
+            $index: index($item-units, $value);
 
-          &:nth-child(#{$index}) {
-            .list-item {
-              background-position: #{nth($value, 1)} #{nth($value, 2)};
+            &:nth-child(#{$index}) {
+              .list-item {
+                background-position: #{nth($value, 1)} #{nth($value, 2)};
+              }
             }
           }
         }
       }
-    }
 
-    .ads {
-      margin-top: 5px;
+      .ads {
+        margin-top: 5px;
 
-      img {
-        opacity: 0.8;
-        transition: all 400ms;
+        img {
+          opacity: 0.8;
+          transition: all 400ms;
 
-        &:hover {
-          opacity: 1;
+          &:hover {
+            opacity: 1;
+          }
         }
       }
     }
   }
 }
-}
 </style>
-

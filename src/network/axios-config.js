@@ -1,12 +1,13 @@
 import axios from "axios";
 import nprogress from "nprogress";
 
-import { detail } from "@/store/children/detail/detail.js"; // 取得 UUID 模块中定义的 UUID
-
 // 引入加载进度条样式
-import "../../node_modules/nprogress/nprogress.css";
+import "@/../node_modules/nprogress/nprogress.css";
 // 修改加载进度条部分默认样式
 import "@/assets/css/modify-nprogress.css";
+
+import { loginAndRegister } from "@/store/children/user/loginAndRegister";
+import { detail } from "@/store/children/detail/detail.js"; // 取得 UUID 模块中定义的 UUID
 
 const apiLink = "/api"; // 我就不在配置文件中设置代理了(理直气壮.jpg)
 // 配置基本API路径
@@ -17,12 +18,17 @@ const requestFn = axios.create({
 
 // 请求拦截器
 requestFn.interceptors.request.use((config) => {
-  nprogress.start(); // 进度条开始
+  nprogress.start(); // 设置加载滚动进度条开始加载
 
   // 为请求响应头设置临时唯一标识
-  const userTempId = detail.state.userUUID;
+  // 传递匿名用户唯一标识符信息
   if (detail.state.userUUID) {
-    config.headers.userTempId = userTempId;
+    config.headers.userTempId = detail.state.userUUID;
+  }
+
+  // 携带 用户 token 给服务器(如果存在的话)
+  if (loginAndRegister.state.token) {
+    config.headers.token = loginAndRegister.state.token;
   }
   return config;
 });

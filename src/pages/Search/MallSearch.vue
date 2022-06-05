@@ -29,16 +29,15 @@
 
             <!-- 品牌信息 -->
             <li class="with-x" v-if="searchParams.trademark.split(':')[1]">
-              {{ searchParams.trademark.split(':')[1] }}
+              {{ searchParams.trademark.split(":")[1] }}
               <i @click="removeTrademark">x</i>
             </li>
 
             <!-- 平台售卖属性 -->
             <li class="with-x" v-for="(attrValue, index) in searchParams.props" :key="index">
-              {{ attrValue.split(':')[1] }}
+              {{ attrValue.split(":")[1] }}
               <i @click="removeAttr(index)">x</i>
             </li>
-
           </ul>
         </div>
 
@@ -83,7 +82,6 @@
               <!-- 产品模块 -->
               <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
-
                   <div class="p-img">
                     <router-link :to="`/detail/${good.id}`">
                       <!-- 商品图片 -->
@@ -100,7 +98,11 @@
                   </div>
 
                   <div class="attr">
-                    <a target="_blank" href="item.html" title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">
+                    <a
+                      target="_blank"
+                      href="item.html"
+                      title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
+                    >
                       <!-- 标题 -->
                       {{ good.title }}
                     </a>
@@ -114,7 +116,6 @@
                     <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
                     <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
                   </div>
-
                 </div>
               </li>
             </ul>
@@ -122,8 +123,13 @@
 
           <!-- 分页器 -->
           <!--        当前选择页,  每页显示多少数据, 总记录数,  连续显示几页 -->
-          <Pagination :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :total="total" :continues="5"
-            @getPageNo="getPageNo" />
+          <Pagination
+            :pageNo="searchParams.pageNo"
+            :pageSize="searchParams.pageSize"
+            :total="total"
+            :continues="5"
+            @getPageNo="getPageNo"
+          />
         </div>
       </div>
     </div>
@@ -131,27 +137,26 @@
 </template>
 
 <script>
-import SearchSelector from "./SearchSelector/SearchSelector.vue";
+const SearchSelector = () => import("./SearchSelector/SearchSelector.vue");
 import { mapGetters, mapState } from "vuex";
-
 export default {
   name: "MallSearch",
   components: { SearchSelector },
   data() {
     return {
       searchParams: {
-        category1Id: "",        /* 一级分类 ID */
-        category2Id: "",        /* 二级分类 ID */
-        category3Id: "",        /* 三级分类 ID */
-        categoryName: "",       /* 品类名 */
-        keyword: "",            /* 关键字 */
-        order: "1:desc",        /* 排序方式, 默认为综合降序 */
-        pageNo: 1,            /* 页码 */
-        pageSize: 10,         /* 每页数量 */
-        props: [],              /* 商品属性的搜索条件 */
-        trademark: "",          /* 品牌的搜索条件 */
-      }
-    }
+        category1Id: "" /* 一级分类 ID */,
+        category2Id: "" /* 二级分类 ID */,
+        category3Id: "" /* 三级分类 ID */,
+        categoryName: "" /* 品类名 */,
+        keyword: "" /* 关键字 */,
+        order: "1:desc" /* 排序方式, 默认为综合降序 */,
+        pageNo: 1 /* 页码 */,
+        pageSize: 10 /* 每页数量 */,
+        props: [] /* 商品属性的搜索条件 */,
+        trademark: "" /* 品牌的搜索条件 */,
+      },
+    };
   },
 
   methods: {
@@ -214,10 +219,10 @@ export default {
     changeOrder(flag) {
       let status = this.searchParams.order.split(":");
       // 不考虑后面可能有其它的排序情况, 有的话自己 switch 或者 if else 大法 ^_^
-      flag === "1" ? this.searchParams.order = '1:' + status[1] : this.searchParams.order = '2:' + status[1];
+      flag === "1" ? (this.searchParams.order = "1:" + status[1]) : (this.searchParams.order = "2:" + status[1]);
       // 更改升降序状态
       this.toggleArrow();
-      status = null;  /* 其实没必要指向 null, 如果用 const声明, 在失去可访问性时 GC 也知道标记回收 */
+      status = null; /* 其实没必要指向 null, 如果用 const声明, 在失去可访问性时 GC 也知道标记回收 */
       this.getData(); /* 更新数据 */
     },
 
@@ -226,14 +231,16 @@ export default {
       // 取得当前的升降序状态
       const arrowForward = this.searchParams.order.split(":");
       // 改变升降序
-      arrowForward[1] === "desc" ? this.searchParams.order = `${arrowForward[0]}:asc` : this.searchParams.order = `${arrowForward[0]}:desc`;
+      arrowForward[1] === "desc"
+        ? (this.searchParams.order = `${arrowForward[0]}:asc`)
+        : (this.searchParams.order = `${arrowForward[0]}:desc`);
     },
 
     // 跳转到指定页码
     getPageNo(pageNo) {
       this.searchParams.pageNo = pageNo;
-      this.getData()
-    }
+      this.getData();
+    },
   },
 
   watch: {
@@ -247,13 +254,13 @@ export default {
         this.searchParams.category1Id = undefined;
         this.searchParams.category2Id = undefined;
         this.searchParams.category3Id = undefined;
-      }
-    }
+      },
+    },
   },
 
   beforeMount() {
     // 组件渲染前整理好要显示的参数
-    Object.assign(this.searchParams, this.$route.query, this.$route.params)
+    Object.assign(this.searchParams, this.$route.query, this.$route.params);
   },
 
   computed: {
@@ -263,7 +270,7 @@ export default {
     ...mapGetters("search", ["goodsList"]),
 
     ...mapState("search", {
-      total: state => state.searchList.total
+      total: (state) => state.searchList.total,
     }),
 
     /**
@@ -271,7 +278,7 @@ export default {
      * @returns {boolean} true: 综合排序, false: 价格排序
      */
     isByUniversal() {
-      return this.searchParams.order.indexOf('1') !== -1
+      return this.searchParams.order.indexOf("1") !== -1;
     },
 
     /**
@@ -279,8 +286,8 @@ export default {
      * @returns {boolean} true: 箭头朝上, false: 箭头朝下
      */
     isArrowTop() {
-      return this.searchParams.order.split(':').indexOf('asc') !== -1;
-    }
+      return this.searchParams.order.split(":").indexOf("asc") !== -1;
+    },
   },
 
   mounted() {

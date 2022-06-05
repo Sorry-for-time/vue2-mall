@@ -47,7 +47,9 @@
                 </div>
                 <div class="fixWidth">
                   <i class="red-bg">加价购</i>
-                  <em class="t-gray">满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换购热销商品</em>
+                  <em class="t-gray"
+                    >满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换购热销商品</em
+                  >
                 </div>
               </div>
             </div>
@@ -68,15 +70,19 @@
             <div class="chooseArea">
               <div class="choosed"></div>
               <!-- 产品售卖属性列表 -->
-              <dl v-for="(spuSaleAttr) in spuSaleAttrList" :key="spuSaleAttr.id">
+              <dl v-for="spuSaleAttr in spuSaleAttrList" :key="spuSaleAttr.id">
                 <!-- 属性依据分类 -->
                 <dt class="title">{{ spuSaleAttr.saleAttrName }}</dt>
 
                 <!-- 对应属性名称 , 且设置默认勾选项-->
                 <!-- 绑定单击回调通过排他操作设置单独属性高亮 -->
-                <dd changepirce="0" :class="{ active: spuSaleAttrValue.isChecked === '1' }"
-                  v-for="(spuSaleAttrValue) in spuSaleAttr.spuSaleAttrValueList" :key="spuSaleAttrValue.id"
-                  @click="changeActive(spuSaleAttrValue, spuSaleAttr.spuSaleAttrValueList)">
+                <dd
+                  changepirce="0"
+                  :class="{ active: spuSaleAttrValue.isChecked === '1' }"
+                  v-for="spuSaleAttrValue in spuSaleAttr.spuSaleAttrValueList"
+                  :key="spuSaleAttrValue.id"
+                  @click="changeActive(spuSaleAttrValue, spuSaleAttr.spuSaleAttrValueList)"
+                >
                   {{ spuSaleAttrValue.saleAttrValueName }}
                 </dd>
               </dl>
@@ -84,9 +90,9 @@
 
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" v-model.number="skuNum" @change="changeSkuNum($event)" class="itxt">
+                <input autocomplete="off" v-model.number="skuNum" @change="changeSkuNum($event)" class="itxt" />
                 <a href="javascript:" class="plus" @click="++skuNum">+</a>
-                <a href="javascript:" class="mins" @click="skuNum > 1 ? --skuNum : skuNum = 1">-</a>
+                <a href="javascript:" class="mins" @click="skuNum > 1 ? --skuNum : (skuNum = 1)">-</a>
               </div>
 
               <div class="add">
@@ -123,7 +129,7 @@
                   <div class="p-img">
                     <img src="./images/part01.png" />
                   </div>
-                  <div class="attr">Apple苹果iPhone 6s (A1699) </div>
+                  <div class="attr">Apple苹果iPhone 6s (A1699)</div>
                   <div class="price">
                     <em>¥</em>
                     <i>6088.00</i>
@@ -230,7 +236,7 @@
                 <img src="./images/dp01.png" />
                 <p>Feless费勒斯VR</p>
                 <label>
-                  <input type="checkbox" value="39">
+                  <input type="checkbox" value="39" />
                   <span>39</span>
                 </label>
               </li>
@@ -238,7 +244,7 @@
                 <img src="./images/dp02.png" />
                 <p>Feless费勒斯VR</p>
                 <label>
-                  <input type="checkbox" value="50">
+                  <input type="checkbox" value="50" />
                   <span>50</span>
                 </label>
               </li>
@@ -246,7 +252,7 @@
                 <img src="./images/dp03.png" />
                 <p>Feless费勒斯VR</p>
                 <label>
-                  <input type="checkbox" value="59">
+                  <input type="checkbox" value="59" />
                   <span>59</span>
                 </label>
               </li>
@@ -254,16 +260,14 @@
                 <img src="./images/dp04.png" />
                 <p>Feless费勒斯VR</p>
                 <label>
-                  <input type="checkbox" value="99">
+                  <input type="checkbox" value="99" />
                   <span>99</span>
                 </label>
               </li>
             </ul>
             <div class="result">
               <div class="num">已选购0件商品</div>
-              <div class="price-tit">
-                套餐价
-              </div>
+              <div class="price-tit">套餐价</div>
               <div class="price">￥5299</div>
               <button class="addshopcar">加入购物车</button>
             </div>
@@ -272,29 +276,19 @@
         <div class="intro">
           <ul class="tab-wraped">
             <li class="active">
-              <a href="###">
-                商品介绍
-              </a>
+              <a href="###"> 商品介绍 </a>
             </li>
             <li>
-              <a href="###">
-                规格与包装
-              </a>
+              <a href="###"> 规格与包装 </a>
             </li>
             <li>
-              <a href="###">
-                售后保障
-              </a>
+              <a href="###"> 售后保障 </a>
             </li>
             <li>
-              <a href="###">
-                商品评价
-              </a>
+              <a href="###"> 商品评价 </a>
             </li>
             <li>
-              <a href="###">
-                手机社区
-              </a>
+              <a href="###"> 手机社区 </a>
             </li>
           </ul>
           <div class="tab-content">
@@ -341,21 +335,21 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 
-import ImageList from './ImageList/ImageList'
-import Zoom from './Zoom/Zoom'
+const ImageList = () => import("./ImageList/ImageList");
+const Zoom = () => import("./Zoom/Zoom");
 
 export default {
-  name: 'GoodDetail',
+  name: "GoodDetail",
   components: {
     ImageList,
-    Zoom
+    Zoom,
   },
   data() {
     return {
-      skuNum: 1, /* 产品默认购买个数 */
-    }
+      skuNum: 1 /* 产品默认购买个数 */,
+    };
   },
 
   methods: {
@@ -374,7 +368,7 @@ export default {
       const value = event.target.value;
       // 非法情况判断
       if (isNaN(value) || value < 1) {
-        this.skuNum = 1
+        this.skuNum = 1;
       } else {
         this.skuNum = parseInt(value); // 取整
       }
@@ -382,43 +376,38 @@ export default {
 
     // 加入购物车
     addToShopCar() {
-      this.$store.dispatch(
-        "detail/addOrUpdateShopCart", { skuId: this.$route.params.skuId, skuNum: this.skuNum })
-        .then(
-          // 成功的情况跳转到购物车页面
-          () => {
-            // 路由跳转
-            this.$router.push({
-              name: "addCartSuccess",
-              query: {
-                skuNum: this.skuNum // 将购买数量传递过去
-              }
-            });
-            // 将当前加入购物车的产品信息保存到 sessionStorage 中
-            sessionStorage.setItem("skuInfo", JSON.stringify(this.skuInfo));
-          },
-          // 失败的情况
-          fail => {
-            alert(fail)
+      this.$store.dispatch("detail/addOrUpdateShopCart", { skuId: this.$route.params.skuId, skuNum: this.skuNum }).then(
+        // 成功的情况跳转到购物车页面
+        () => {
+          // 路由跳转
+          this.$router.push({
+            name: "addCartSuccess",
+            query: {
+              skuNum: this.skuNum, // 将购买数量传递过去
+            },
           });
-    }
+          // 将当前加入购物车的产品信息保存到 sessionStorage 中
+          sessionStorage.setItem("skuInfo", JSON.stringify(this.skuInfo));
+        },
+        // 失败的情况
+        (fail) => {
+          alert(fail);
+        }
+      );
+    },
   },
 
   computed: {
-    ...mapState("detail", { goodDetail: state => state.goodDetail }),
+    ...mapState("detail", { goodDetail: (state) => state.goodDetail }),
 
-    ...mapGetters("detail", [
-      "categoryView",
-      "skuInfo",
-      "spuSaleAttrList"]
-    ),
+    ...mapGetters("detail", ["categoryView", "skuInfo", "spuSaleAttrList"]),
   },
 
   mounted() {
     // 取得数据
     this.$store.dispatch("detail/getGoodDetail", this.$route.params.skuId);
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -430,7 +419,7 @@ export default {
     .conPoin {
       padding: 9px 15px 9px 0;
 
-      &>span+span:before {
+      & > span + span:before {
         content: "/\00a0";
         padding: 0 5px;
         color: #ccc;
@@ -525,8 +514,6 @@ export default {
               }
             }
           }
-
-
         }
 
         .support {
@@ -697,7 +684,7 @@ export default {
             }
 
             .goodsList {
-              &>li {
+              & > li {
                 margin: 5px 0 15px;
                 border-bottom: 1px solid #ededed;
                 padding-bottom: 5px;
@@ -835,7 +822,7 @@ export default {
             }
 
             .price {
-              color: #B1191A;
+              color: #b1191a;
               font-size: 16px;
               margin-bottom: 10px;
             }
@@ -862,7 +849,7 @@ export default {
           li {
             float: left;
 
-            &+li>a {
+            & + li > a {
               border-left: 1px solid #ddd;
             }
 
@@ -912,7 +899,6 @@ export default {
               }
             }
           }
-
         }
       }
     }

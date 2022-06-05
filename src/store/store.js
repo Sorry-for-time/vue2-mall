@@ -7,6 +7,7 @@ import { home } from "@/store/children/home/home.js";
 import { search } from "@/store/children/search/search.js";
 import { detail } from "@/store/children/detail/detail.js";
 import { shopCart } from "@/store/children/shopCart/shopCart.js";
+import { loginAndRegister } from "./children/user/loginAndRegister";
 
 export const store = new vuex.Store({
   /**
@@ -20,5 +21,6 @@ export const store = new vuex.Store({
     search,
     detail,
     shopCart,
+    loginAndRegister,
   },
 });
