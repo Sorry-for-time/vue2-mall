@@ -182,7 +182,7 @@ export default {
        * 不需要再触发 getData(), 因为 watch 监视着 $route, 当 $route 里的参数发生时会自动去调用 getData() 重新获取数据
        * 重新跳转时保存 quey 参数
        */
-      this.$router.push({ name: "search", query: this.$route.query });
+      this.$router.push({ name: "search", query: this.$route.query || {} });
     },
 
     // 品牌

@@ -87,8 +87,8 @@ export default {
           // 派发登录
           .dispatch("loginAndRegister/login", params)
           .then(() => {
-            // 登录成功后跳转到首页
-            this.$router.push("/home");
+            // 登录成功后跳转到首页且覆盖掉登录页面历史记录信息
+            this.$router.replace("/home");
           })
           .catch((err) => {
             alert(err);

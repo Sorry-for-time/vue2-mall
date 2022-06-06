@@ -29,6 +29,7 @@ const MallBrand = () => import("@/pages/Home/MallBrand/MallBrand.vue");
 
 export default {
   name: "MallHome",
+
   components: {
     ListContainer,
     Recommend,
@@ -37,11 +38,13 @@ export default {
     MallFloor,
     MallBrand,
   },
+
   computed: {
     ...mapState("home", {
       floorList: (state) => state.floorList,
     }),
   },
+
   mounted() {
     // 在挂载成功后请求对应的用户状态数据
     this.$store.dispatch("loginAndRegister/getUserInfo").then(

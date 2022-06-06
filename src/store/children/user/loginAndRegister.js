@@ -1,9 +1,10 @@
-import { requestVerifyCode, requestSignUp, requestLogin, requestUserInfo } from "@/network/api/apis.js";
+import { requestVerifyCode, requestSignUp, requestLogin, requestUserInfo, requestLogout } from "@/network/api/apis.js";
 
 const state = {
   verifyCode: "" /* 验证码 */,
   token: localStorage.getItem("TOKEN") || "" /* 登录用户的标识符 */,
-  userInfo: {} /* 登录用户的信息 */,
+  // 登录用户的信息, 如果已经在使过程用中, 即使 token 过期也等到下一次打开页面时在重新跳转到登录页面重新登录
+  userInfo: JSON.parse(sessionStorage.getItem("userInfo")) || {},
 };
 
 const getters = {
@@ -56,6 +57,19 @@ const actions = {
       return Promise.reject(result.message);
     }
   },
+
+  // 退出登录
+  async logout(context) {
+    const result = await requestLogout();
+    // 不管服务端的响应何, 都先删除本地的缓存数据
+    context.commit("REMOVE_USER_TOKEN");
+
+    if (result.code.toString() === "200") {
+      return "success";
+    } else {
+      return Promise.reject(result.message);
+    }
+  },
 };
 
 const mutations = {
@@ -66,13 +80,23 @@ const mutations = {
 
   // 保存 token
   SAVE_TOKEN(state, token) {
-    localStorage.setItem("TOKEN", token); /* 持久化保存 token, 下次打开页时直接使用 */
     state.token = token;
+    localStorage.setItem("TOKEN", token); /* 持久化保存 token, 下次打开页面时直接使用 */
   },
 
   // 保存用户信息
   SET_USER_INFO(state, payload) {
     state.userInfo = payload;
+    sessionStorage.setItem("userInfo", JSON.stringify(payload));
+  },
+
+  // 退出登录
+  REMOVE_USER_TOKEN(state) {
+    // 移除 token 和 当前用户信息
+    state.token = "";
+    state.userInfo = {};
+    localStorage.removeItem("TOKEN");
+    sessionStorage.removeItem("userInfo");
   },
 };
 

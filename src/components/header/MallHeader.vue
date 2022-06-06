@@ -16,7 +16,7 @@
           <!-- 登录后的情况 -->
           <p v-else>
             <span> {{ userName }}</span>
-            <a class="register">退出登录</a>
+            <a class="register" @click="logout">退出登录</a>
           </p>
         </div>
 
@@ -36,7 +36,7 @@
     <div class="bottom">
       <h1 class="logoArea">
         <router-link class="logo" to="/home">
-          <img src="./images/logo.png" alt="" />
+          <img src="./images/logo.png" alt="图片貌似没加载出来..." />
         </router-link>
       </h1>
 
@@ -59,6 +59,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+
 export default {
   name: "MallHeader",
   data() {
@@ -79,6 +80,19 @@ export default {
       // 如果路径中也包含了 query 参数就跟着传递过去(空对象的情况也传个空对象过去)
       location.query = this.$route.query || {};
       this.$router.push(location);
+    },
+
+    // 退出登录
+    logout() {
+      this.$store
+        .dispatch("loginAndRegister/logout")
+        .then(() => {
+          this.$router.replace("/home");
+        })
+        // 发送给服务端删除登录状态失败的情况
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 

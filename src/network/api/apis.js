@@ -66,3 +66,8 @@ export function requestLogin(params) {
 export function requestUserInfo() {
   return requestFn.get("user/passport/auth/getUserInfo");
 }
+
+// 退出登录
+export function requestLogout() {
+  return requestFn.get("user/passport/logout");
+}
