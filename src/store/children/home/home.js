@@ -1,8 +1,4 @@
-import {
-  requestCategoryList,
-  requestBannerList,
-  requestFloorList,
-} from "@/network/api/apis";
+import { requestCategoryList, requestBannerList, requestFloorList } from "@/network/api/apis";
 
 const state = {
   categoryList: [],
@@ -15,21 +11,21 @@ const getters = {};
 const actions = {
   async categoryList(context) {
     const result = await requestCategoryList();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("CATEGORY_LIST", result.data);
     }
   },
 
   async getBannerList(context) {
     const result = await requestBannerList();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("GET_BANNER_LIST", result.data);
     }
   },
 
   async getFloorList(context) {
     const result = await requestFloorList();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("GET_FLOOR_LIST", result.data);
     }
   },

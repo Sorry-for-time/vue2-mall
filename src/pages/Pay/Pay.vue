@@ -139,7 +139,7 @@ export default {
         this.timer = setInterval(async () => {
           const result = await requestPayInfo(this.payInfo.orderId);
           // 清除定时器
-          if (result.code.toString() === "200") {
+          if (result.code == 200) {
             console.log(result);
             clearInterval(this.timer);
             this.timer = null;
@@ -155,7 +155,7 @@ export default {
 
     async getPayInfo() {
       const result = await requestPayInfo(this.orderId);
-      if (result.code.toString() === "200") {
+      if (result.code == 200) {
         this.payInfo = result.data;
       } else {
         console.error(result);

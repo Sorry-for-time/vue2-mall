@@ -229,7 +229,7 @@ export default {
     // 复选框状态
     isAllChecked: {
       get() {
-        return this.cartInfoList.every((item) => item.isChecked.toString() == "1") && this.cartInfoList.length >= 1;
+        return this.cartInfoList.every((item) => item.isChecked == 1) && this.cartInfoList.length >= 1;
       },
     },
 

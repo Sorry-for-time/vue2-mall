@@ -11,7 +11,7 @@ const actions = {
   // 返回地址信息(需要存在有效 token, 无需多说)
   async getUserAddressInfo(context) {
     const result = await requestAddressInfo();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("SET_ADDRESS_INFO", result.data);
       return "success";
     } else {
@@ -22,7 +22,7 @@ const actions = {
   // 获取商品清单信息
   async getUserOrderInfo(context) {
     const result = await requestOrderInfo();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("SET_ORDER_INFO", result.data);
       return "success";
     } else {

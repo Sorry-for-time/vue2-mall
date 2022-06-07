@@ -18,7 +18,7 @@ const actions = {
   // 取得验证码
   async getVerifyCode(context, phone) {
     const result = await requestVerifyCode(phone);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("SET_VERIFY_CODE", result.data);
       return "success";
     } else {
@@ -29,7 +29,7 @@ const actions = {
   // 注册用户
   async signUp(_context, userParams) {
     const result = await requestSignUp(userParams);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       return "success";
     } else {
       return Promise.reject(result.message);
@@ -39,7 +39,7 @@ const actions = {
   // 登录用户
   async login(context, userParams) {
     const result = await requestLogin(userParams);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("SAVE_TOKEN", result.data.token);
       return "success";
     } else {
@@ -50,7 +50,7 @@ const actions = {
   // 获取用户信息
   async getUserInfo(context) {
     const result = await requestUserInfo();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("SET_USER_INFO", result.data);
       return "success";
     } else {
@@ -64,7 +64,7 @@ const actions = {
     // 不管服务端的响应何, 都先删除本地的缓存数据
     context.commit("REMOVE_USER_TOKEN");
 
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       return "success";
     } else {
       return Promise.reject(result.message);

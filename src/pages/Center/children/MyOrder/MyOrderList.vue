@@ -158,7 +158,7 @@ export default {
     // 获取数据
     async getData(pageNo, limit) {
       const result = await requestCenterInfo(pageNo, limit);
-      if (result.code.toString() === "200") {
+      if (result.code == 200) {
         this.centerInfo = result.data;
       } else {
         console.error(result);

@@ -4,7 +4,7 @@ module.exports = defineConfig({
   // 根据环境决定是否启用 eslint 语法检查(开发时关闭, 编译打包时启用)
   lintOnSave: process.env.NODE_ENV === "production",
   // 在生产环境下禁用生成 map 文件
-  productionSourceMap: process.env.NODE_ENV !== "production",
+  productionSourceMap: process.env.NODE_ENV === "production",
   devServer: {
     // 配置代理解决跨域访问问题
     proxy: {

@@ -39,7 +39,7 @@
       <div class="detail">
         <h5>商品清单</h5>
         <!-- eslint-disable -->
-        <ul class="list clearFix" v-for="value in orderInfo.detailArrayList" :key="$UUID()">
+        <ul class="list clearFix" v-for="(value, index) in orderInfo.detailArrayList" :key="index">
           <li>
             <img :src="value.imgUrl" height="84px" alt="" />
           </li>
@@ -144,7 +144,7 @@ export default {
       const result = await requestSubmitPayInfo(tradeNo, data);
       console.log(result);
 
-      if (result.code.toString() === "200") {
+      if (result.code == 200) {
         this.orderId = result.data;
         // 跳转到支付界面
         this.$router.push(`/pay?orderId=${this.orderId}`);

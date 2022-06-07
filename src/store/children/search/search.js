@@ -23,7 +23,7 @@ const actions = {
   // 获取搜索请求数据
   async getSearchList(context, params = {}) {
     const result = await requestSearchInfo(params);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("GET_SEARCH_LIST", result.data);
     }
   },

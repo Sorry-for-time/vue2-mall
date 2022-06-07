@@ -31,7 +31,7 @@ const actions = {
   // 获取产品信息
   async getGoodDetail(context, id) {
     const result = await requestGoodDetail(id);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       context.commit("GET_GOOD_DETAIL", result.data);
     }
   },
@@ -44,7 +44,7 @@ const actions = {
   // 添加到购物车或者更新购物车
   async addOrUpdateShopCart(_context, { skuId, skuNum }) {
     const result = await requestUpdateShopCart(skuId, skuNum);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       return result; // 响应成功的状态
     } else {
       return Promise.reject(new Error("Fail")); // 响应失败的情况

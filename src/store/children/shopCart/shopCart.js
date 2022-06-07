@@ -1,8 +1,4 @@
-import {
-  requestShopCartList,
-  requestDeleteCartById,
-  requestUpdateCartCheckedStatus,
-} from "@/network/api/apis";
+import { requestShopCartList, requestDeleteCartById, requestUpdateCartCheckedStatus } from "@/network/api/apis";
 
 const state = {
   cartList: [],
@@ -18,7 +14,7 @@ const actions = {
   // 获取购物车列表数据
   async getCartList({ commit }) {
     const result = await requestShopCartList();
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       commit("SET_SHOP_CART_LIST", result.data);
     }
   },
@@ -26,7 +22,7 @@ const actions = {
   // 根据 id 删除购物车的商品
   async deleCartListById(_context, id) {
     const result = await requestDeleteCartById(id);
-    if (result.code.toString() === "200") {
+    if (result.code == 200) {
       return "success";
     } else {
       Promise.reject(new Error("fail"));
@@ -51,9 +47,7 @@ const actions = {
         return cart.isChecked;
       })
       .forEach((element) => {
-        requestResults.push(
-          context.dispatch("deleCartListById", element.skuId)
-        );
+        requestResults.push(context.dispatch("deleCartListById", element.skuId));
       });
     // 返回执行结果
     return Promise.all(requestResults);

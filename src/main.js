@@ -1,6 +1,5 @@
 import Vue from "vue";
 import App from "@/App.vue";
-import { LazyTool } from "@/plugin/plugin.js";
 import VueLazyload from "vue-lazyload";
 import "@/utils/validate.js"; /* 表单校验 */
 
@@ -18,7 +17,6 @@ const Carousel = () => import("@/components/carousel/Carousel.vue");
 const Pagination = () => import("@/components/pagination/Pagination.vue");
 
 Vue.config.productionTip = false;
-Vue.use(LazyTool);
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   loading: loadingImage,
