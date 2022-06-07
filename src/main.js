@@ -30,6 +30,7 @@ new Vue({
   beforeCreate() {
     Vue.prototype.$bus = this;
     // 绑定组件的弹窗方到 Vue 原型上
+    Vue.prototype.$msgBox = MessageBox;
     Vue.prototype.$alert = MessageBox.alert;
   },
 }).$mount("#app");

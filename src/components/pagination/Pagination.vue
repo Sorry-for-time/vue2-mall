@@ -23,7 +23,7 @@
 
     <button disabled v-if="startAndEndNum.end < totalPage - 1">...</button>
 
-    <button v-if="startAndEndNum.end < totalPage">{{ totalPage }}</button>
+    <button v-if="startAndEndNum.end < totalPage" @click="selectPageNo(totalPage)">{{ totalPage }}</button>
 
     <button v-show="!(pageNo === totalPage)" @click="selectPageNo(pageNo + 1)">下一页</button>
 
@@ -47,6 +47,7 @@ export default {
 
   methods: {
     selectPageNo(pageNo) {
+      // 触发自定义事件
       this.$emit("getPageNo", pageNo);
     },
   },

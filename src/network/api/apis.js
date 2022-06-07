@@ -91,3 +91,13 @@ export function requestSubmitPayInfo(tradeNo, data) {
 export function requestPayInfo(orderId) {
   return requestFn.get(`/payment/weixin/createNative/${orderId}`);
 }
+
+// 查询订单支付情况
+export function requestPayStatus(orderId) {
+  return requestFn.get(`/payment/weixin/queryPayStatus/${orderId}`);
+}
+
+// 获取我的订单列表
+export function requestCenterInfo(page, limit) {
+  return requestFn.get(`/order/auth/${page}/${limit}`);
+}

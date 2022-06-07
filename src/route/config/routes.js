@@ -1,4 +1,3 @@
-// 动态引入组件
 const MallHome = () => import("@/pages/Home/MallHome.vue");
 const MallLogin = () => import("@/pages/Login/MallLogin.vue");
 const MallSearch = () => import("@/pages/Search/MallSearch.vue");
@@ -8,6 +7,12 @@ const AddCartSuccess = () => import("@/pages/AddCartSuccess/AddCartSuccess.vue")
 const ShopCart = () => import("@/pages/ShopCart/ShopCart.vue");
 const Trade = () => import("@/pages/Trade/Trade.vue");
 const Pay = () => import("@/pages/Pay/Pay.vue");
+const PaySuccess = () => import("@/pages/PaySuccess/PaySuccess.vue");
+const Center = () => import("@/pages/Center/Center.vue");
+
+// 二级组件
+const MyOrderList = () => import("@/pages/Center/children/MyOrder/MyOrderList.vue");
+const GroupOrderList = () => import("@/pages/Center/children/GroupOrder/GroupOrderList.vue");
 
 export const routes = [
   // 默认首页
@@ -122,5 +127,44 @@ export const routes = [
     meta: {
       show: true,
     },
+  },
+
+  // 支付成功界面
+  {
+    name: "paySuccess",
+    path: "/paySuccess",
+    component: PaySuccess,
+    meta: {
+      show: true,
+    },
+  },
+
+  // 个人中心
+  {
+    name: "center",
+    path: "/center",
+    component: Center,
+    meta: {
+      show: true,
+    },
+    // 子路由
+    children: [
+      // 重定向
+      {
+        path: "/center",
+        redirect: "myOrder",
+      },
+
+      {
+        name: "myOrder",
+        path: "myOrder",
+        component: MyOrderList,
+      },
+      {
+        name: "groupOrder",
+        path: "groupOrder",
+        component: GroupOrderList,
+      },
+    ],
   },
 ];

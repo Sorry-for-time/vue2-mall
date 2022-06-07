@@ -91,6 +91,7 @@
 <!-- eslint-disable -->
 <script>
 import { requestPayInfo } from "@/network/api/apis";
+import QRCode from "qrcode";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -98,20 +99,58 @@ export default {
   data() {
     return {
       payInfo: {},
+      timer: null,
+      code: "",
     };
   },
 
   methods: {
     // 获取支付信息
-    open() {
-      this.$alert("<strong>这是 <i>HTML</i> 片段</strong>", "HTML 片段", {
+    async open() {
+      // 生成二维码
+      const urlQRCode = await QRCode.toDataURL(this.payInfo.codeUrl);
+      this.$alert(`<img src=${urlQRCode} />`, {
         center: true,
         dangerouslyUseHTMLString: true,
         showCancelButton: true,
         cancelButtonText: "支付遇见问题?",
-        confirmButtonText: "已支持成功",
+        confirmButtonText: "已支付成功",
         showClose: false /* 关闭右上角的关闭按钮 */,
+        beforeClose: (type, instance, done) => {
+          if (type === "cancel") {
+            alert("请连续管理员");
+            clearInterval(this.timer);
+            this.timer = null;
+            done();
+          } else {
+            // 确认是否支付成功(这里直接就当作都花钱了)
+            // if (this.code === "200") {
+            clearInterval(this.timer);
+            this.timer = null;
+            done();
+            this.$router.push("/paySuccess");
+            // }
+          }
+        },
       });
+
+      if (!this.timer) {
+        // 轮询请求服务器状态
+        this.timer = setInterval(async () => {
+          const result = await requestPayInfo(this.payInfo.orderId);
+          // 清除定时器
+          if (result.code.toString() === "200") {
+            console.log(result);
+            clearInterval(this.timer);
+            this.timer = null;
+            this.code = result.code;
+            // 关关闭弹窗
+            this.$msgBox.close();
+            // 跳转到支付成功页面
+            this.$router.push("/paySuccess");
+          }
+        }, 2000);
+      }
     },
 
     async getPayInfo() {
