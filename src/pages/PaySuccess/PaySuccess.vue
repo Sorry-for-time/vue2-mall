@@ -18,6 +18,19 @@
 <script>
 export default {
   name: "PaySuccess",
+  //
+  /**
+   * @description 配置组件内守卫 ==> 此时不能获取组件实例, this 是 undefined
+   * @detail 因为守卫在导航确认前被调用，因此即将登场的新组件还没被创建。
+   * @see <a href="https://v3.router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E7%BB%84%E4%BB%B6%E5%86%85%E7%9A%84%E5%AE%88%E5%8D%AB"></a>
+   */
+  beforeRouteEnter(_to, from, next) {
+    if (from.path === "/pay") {
+      next();
+    } else {
+      next(false);
+    }
+  },
 };
 </script>
 

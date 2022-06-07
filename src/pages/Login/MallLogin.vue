@@ -88,7 +88,9 @@ export default {
           .dispatch("loginAndRegister/login", params)
           .then(() => {
             // 登录成功后跳转到首页且覆盖掉登录页面历史记录信息
-            this.$router.replace("/home");
+            // 根据是否携带 query 参数进行跳转判定
+            const path = this.$route.query.redirect || "/home";
+            this.$router.push(path);
           })
           .catch((err) => {
             alert(err);

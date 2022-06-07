@@ -23,12 +23,12 @@
         <div class="typeList">
           <router-link to="/center">我的订单</router-link>
           <router-link to="/shopCart">我的购物车</router-link>
-          <a href="###">我的尚品汇</a>
-          <a href="###">尚品汇会员</a>
-          <a href="###">企业采购</a>
-          <a href="###">关注尚品汇</a>
-          <a href="###">合作招商</a>
-          <a href="###">商家后台</a>
+          <a>我的尚品汇</a>
+          <a>尚品汇会员</a>
+          <a>企业采购</a>
+          <a>关注尚品汇</a>
+          <a>合作招商</a>
+          <a>商家后台</a>
         </div>
       </div>
     </div>

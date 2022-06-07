@@ -117,6 +117,16 @@ export const routes = [
     meta: {
       show: true,
     },
+    // 配置路由独享守卫
+    beforeEnter(to, from, next) {
+      // 仅当从购物车出发时才允许跳转到目的地
+      if (from.path === "/shopCart") {
+        next();
+      } else {
+        // (终端当前导航)停留在当前
+        next(from.path);
+      }
+    },
   },
 
   // 支付界面
@@ -126,6 +136,13 @@ export const routes = [
     component: Pay,
     meta: {
       show: true,
+    },
+    beforeEnter: (_to, from, next) => {
+      if (from.path === "/trade") {
+        next();
+      } else {
+        next(from.path);
+      }
     },
   },
 

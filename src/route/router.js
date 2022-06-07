@@ -92,7 +92,20 @@ router.beforeEach(
     }
     // 未登录的情况
     else {
-      next();
+      const path = to.path;
+      // 排除边界情况
+      if (
+        path === "/shopCart" ||
+        path === "/center" ||
+        path.indexOf("trade") !== -1 ||
+        path.indexOf("pay") !== -1 ||
+        path.indexOf("center") !== -1
+      ) {
+        // 重定向, 且携带目标路径到 query 参数当中
+        next("/login?redirect=" + path);
+      } else {
+        next();
+      }
     }
   }
 );
