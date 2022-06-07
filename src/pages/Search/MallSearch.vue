@@ -85,7 +85,7 @@
                   <div class="p-img">
                     <router-link :to="`/detail/${good.id}`">
                       <!-- 商品图片 -->
-                      <img :src="good.defaultImg" alt="图片貌似没有加载出来🙃" />
+                      <img v-lazy="good.defaultImg" alt="图片貌似没有加载出来🙃" />
                     </router-link>
                   </div>
 
