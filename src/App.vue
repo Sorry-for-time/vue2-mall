@@ -4,9 +4,7 @@
     <MallHeader />
 
     <!-- 路由组件视图 -->
-    <router-view>
-      <KeepAlive />
-    </router-view>
+    <router-view />
 
     <!-- 页尾 -->
     <MallFooter v-show="$route.meta.show" />
