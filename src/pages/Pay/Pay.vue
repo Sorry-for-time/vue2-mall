@@ -3,7 +3,7 @@
     <div class="pay-container">
       <div class="checkout-tit">
         <h4 class="tit-txt">
-          <span class="success-icon"></span>
+          <el-button type="success" icon="el-icon-check" circle></el-button>
           <span class="success-info">订单提交成功，请您及时付款，以便尽快为您发货~~</span>
         </h4>
 
@@ -72,7 +72,7 @@
         <div class="hr"></div>
 
         <div class="submit">
-          <router-link class="btn" to="/paysuccess">立即支付</router-link>
+          <a class="btn" @click="open">立即支付</a>
         </div>
         <div class="otherpay">
           <div class="step-tit">
@@ -102,6 +102,18 @@ export default {
   },
 
   methods: {
+    // 获取支付信息
+    open() {
+      this.$alert("<strong>这是 <i>HTML</i> 片段</strong>", "HTML 片段", {
+        center: true,
+        dangerouslyUseHTMLString: true,
+        showCancelButton: true,
+        cancelButtonText: "支付遇见问题?",
+        confirmButtonText: "已支持成功",
+        showClose: false /* 关闭右上角的关闭按钮 */,
+      });
+    },
+
     async getPayInfo() {
       const result = await requestPayInfo(this.orderId);
       if (result.code.toString() === "200") {
