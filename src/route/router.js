@@ -43,7 +43,7 @@ const router = new VueRouter({
   // 设置滚动行为
   scrollBehavior: () => {
     return {
-      behavior: "auto",
+      behavior: "smooth",
       y: 0,
     };
   },
@@ -82,15 +82,11 @@ router.beforeEach(
                 next();
               }
             )
-            .catch(
-              // token 已经过期就清理数据且跳转到登录页
-              async () => {
-                // 清理之前的缓存数据
-                await store.dispatch("loginAndRegister/logout");
-                //  重新登录
-                next("/login");
-              }
-            );
+            // token 已经过期就清理数据且跳转到登录页
+            .catch(async () => {
+              await store.dispatch("loginAndRegister/logout");
+              next("/login");
+            });
         }
       }
     }
@@ -102,8 +98,8 @@ router.beforeEach(
 );
 
 // 配置全局后置守卫
-router.afterEach((to, from) => {
-  console.log(to, from);
-});
+// router.afterEach((to, from) => {
+//   console.log(to, from);
+// });
 
 export { router };

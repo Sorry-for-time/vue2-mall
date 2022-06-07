@@ -5,7 +5,7 @@ import nprogress from "nprogress";
  * @description mock 模拟数据 API 配置
  */
 
-import "../../node_modules/nprogress/nprogress.css";
+import "@/../node_modules/nprogress/nprogress.css";
 import "@/assets/css/modify-nprogress.css";
 
 const apiLink = "/mock";

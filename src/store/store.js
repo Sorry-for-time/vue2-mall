@@ -7,7 +7,8 @@ import { home } from "@/store/children/home/home.js";
 import { search } from "@/store/children/search/search.js";
 import { detail } from "@/store/children/detail/detail.js";
 import { shopCart } from "@/store/children/shopCart/shopCart.js";
-import { loginAndRegister } from "./children/user/loginAndRegister";
+import { loginAndRegister } from "@/store/children/user/loginAndRegister";
+import { trade } from "@/store/children/trade/trade";
 
 export const store = new vuex.Store({
   /**
@@ -15,12 +16,14 @@ export const store = new vuex.Store({
    * 如果希望模块具有更高的封装度和复用性，你可以通过添加 namespaced: true 的方式使其成为带命名空间的模块。
    * 当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名
    */
-  strict: process.env.NODE_ENV !== "production",
+  strict: process.env.NODE_ENV !== "production" /* 根据环境自动配置模式 */,
+
   modules: {
     home,
     search,
     detail,
     shopCart,
     loginAndRegister,
+    trade,
   },
 });

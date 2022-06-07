@@ -6,6 +6,8 @@ const MallRegister = () => import("@/pages/Register/MallRegister.vue");
 const GoodDetail = () => import("@/pages/Detail/GoodDetail.vue");
 const AddCartSuccess = () => import("@/pages/AddCartSuccess/AddCartSuccess.vue");
 const ShopCart = () => import("@/pages/ShopCart/ShopCart.vue");
+const Trade = () => import("@/pages/Trade/Trade.vue");
+const Pay = () => import("@/pages/Pay/Pay.vue");
 
 export const routes = [
   // 默认首页
@@ -97,6 +99,26 @@ export const routes = [
     name: "shopCart",
     path: "/shopCart",
     component: ShopCart,
+    meta: {
+      show: true,
+    },
+  },
+
+  // 交易界面
+  {
+    name: "trade",
+    path: "/trade",
+    component: Trade,
+    meta: {
+      show: true,
+    },
+  },
+
+  // 支付界面
+  {
+    name: "pay",
+    path: "/pay",
+    component: Pay,
     meta: {
       show: true,
     },

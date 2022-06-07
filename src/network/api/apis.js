@@ -64,10 +64,30 @@ export function requestLogin(params) {
 
 // 获取用户信息(需要在 header 中设置好 token)
 export function requestUserInfo() {
-  return requestFn.get("user/passport/auth/getUserInfo");
+  return requestFn.get("/user/passport/auth/getUserInfo");
 }
 
 // 退出登录
 export function requestLogout() {
-  return requestFn.get("user/passport/logout");
+  return requestFn.get("/user/passport/logout");
+}
+
+// 获取付款信息
+export function requestAddressInfo() {
+  return requestFn.get("/user/userAddress/auth/findUserAddressList");
+}
+
+// 获取交易清单信息
+export function requestOrderInfo() {
+  return requestFn.get("/order/auth/trade");
+}
+
+// 提交订单信息
+export function requestSubmitPayInfo(tradeNo, data) {
+  return requestFn.post(`/order/auth/submitOrder?tradeNo=${tradeNo}`, data);
+}
+
+// 获取订单支付信息
+export function requestPayInfo(orderId) {
+  return requestFn.get(`/payment/weixin/createNative/${orderId}`);
 }
