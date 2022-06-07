@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "@/App.vue";
 import { LazyTool } from "@/plugin/plugin.js";
 import VueLazyload from "vue-lazyload";
+import "@/utils/validate.js"; /* 表单校验 */
 
 import "@/mock/mock-data-simulate.js"; /* mockjs 模拟数据 */
 import "@/assets/css/scroll-bar.css"; /* 修改 webkit系浏览器默认滚动条样式 */
