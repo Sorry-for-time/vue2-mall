@@ -33,10 +33,10 @@ ps: 我不知道他们的原始项目 github 链接是哪个, 所以这里我以
 
 ## 运行 && 打包
 
-前提: `您必须已经安安装好了node(>=12)环境和 vue-cli(5.0+) 脚手架`
+前提: `您必须已经安装好了 nodejs(>=12)和 vue-cli(5.0+)`
 
 ```sh
-# shell: bash
+# shell: bash or zsh...
 # 安装项目必须的开发依赖
 cd vue2-mall && npm run install
 
@@ -56,7 +56,7 @@ server {
 listen         80;
   server_name  192.xxx.xxx.xxx;
   location / {
-      # 切记将实际路径换你自己的
+      # 记得将实际路径换你自己的
       root      ${your-self_path}${project_name};
       index     index.html;
       try_files $uri $uri/ /index.html;
