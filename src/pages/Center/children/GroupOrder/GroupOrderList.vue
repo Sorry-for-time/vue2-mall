@@ -213,16 +213,6 @@
 <script>
 export default {
   name: "GroupOrderList",
-
-  data() {
-    return {};
-  },
-
-  components: {},
-
-  methods: {},
-
-  computed: {},
 };
 </script>
 

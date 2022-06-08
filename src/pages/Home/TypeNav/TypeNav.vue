@@ -110,7 +110,7 @@ export default {
     // 更改当前所选类别
     changeSelectedIndex: throttle(function (index) {
       this.currentSelectIndex = index;
-    }, 100),
+    }, 30),
 
     // 离开分类列表
     leaveCategoryList() {
@@ -137,14 +137,9 @@ export default {
         } else if (category3id) {
           query.category3Id = category3id;
         }
-
         // 如果路由跳转的时候带有 params 参数, 那么也传递过去(就算是个空对象也传过去)
-        if (this.$route.params) {
-          Reflect.set(packingData, "params", this.$route.params);
-        }
-        // 使用 Reflect API 绑定为对象最追加一个属性
+        Reflect.set(packingData, "params", this.$route.params || {});
         Reflect.set(packingData, "query", query);
-
         // 追加路由信息
         this.$router.push(packingData);
       }
@@ -311,15 +306,16 @@ export default {
     // 显示列表的过渡动画
     .sort-enter-active {
       transform-origin: top center;
-      animation: show-category 200ms ease-out;
+      animation: show-category 100ms ease-out;
 
       @keyframes show-category {
         from {
+          opacity: 0;
           transform: scale(0);
         }
-
         to {
           transform: scale(1);
+          opacity: 1;
         }
       }
     }

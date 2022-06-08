@@ -38,59 +38,80 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Pagination",
 
-  data() {
-    return {};
+  /**
+   * @description 基本分页参数配置
+   */
+  props: {
+    pageNo: {
+      type: Number,
+      default: 1,
+    },
+    pageSize: {
+      type: Number,
+      default: 1,
+    },
+    total: {
+      type: Number,
+      default: 1,
+    },
+    continues: {
+      type: Number,
+      default: 1,
+    },
   },
-  props: ["pageNo", "pageSize", "total", "continues"],
-
-  components: {},
 
   methods: {
+    /**
+     * @description 要求外部使用者为绑定一个名为 getPageNo 的自定义事件以接收组件返回的点击页码数
+     * @param {*} pageNo 当前点击的页码
+     */
     selectPageNo(pageNo) {
-      // 触发自定义事件
       this.$emit("getPageNo", pageNo);
     },
   },
 
   computed: {
-    // 总页数
+    /**
+     * @description 获取总页数
+     */
     totalPage() {
       return Math.ceil(this.total / this.pageSize);
     },
 
-    // 计算分页的范围
+    /**
+     * @description 计算分页的范围
+     */
     startAndEndNum() {
-      let start = 0,
-        end = 0;
+      let continuesStart = 0;
+      let continuesEnd = 0;
+      // 取得外部设置的当前显示页和连续页数要求
       const { pageNo, continues } = this;
-
+      // 在总页数小于所要求的连续页数显示的情况下
       if (this.totalPage < continues) {
-        start = 1;
-        end = this.totalPage;
+        continuesStart = 1;
+        continuesEnd = this.totalPage;
       } else {
-        /**
-         * 处理各种边界情况
-         */
-        start = pageNo - parseInt(continues / 2);
-        end = pageNo + parseInt(continues / 2);
-        // 如过起始点小于1的情况下(即 pageNo 刚好在前几页起始页上)
-        if (start < 1) {
-          start = 1;
-          end = continues;
+        continuesStart = pageNo - parseInt(continues / 2);
+        continuesEnd = pageNo + parseInt(continues / 2);
+        // 如果连续显示页码起始点小于1的情况下(即 pageNo 刚好在前几页起始页上, 如在 1, 2 上)
+        if (continuesStart < 1) {
+          continuesStart = 1;
+          continuesEnd = continues;
         }
-        // 结束页超过实际页的情况
-        if (end > this.totalPage) {
-          end = this.totalPage;
-          start = this.totalPage - continues + 1; // 将其实页往前移动以满足要求
+        // 结束页超过实际总页数的情况
+        if (continuesEnd > this.totalPage) {
+          continuesEnd = this.totalPage;
+          continuesStart = this.totalPage - continues + 1; // 将起始页往前移动以满足要求
         }
       }
-      return { start, end };
+
+      return { start: continuesStart, end: continuesEnd };
     },
 
     // 通过分页范围生成所需的页码数组
     pageList() {
       const dynamicPageNumbers = [];
-      for (let index = this.startAndEndNum.start; index <= this.startAndEndNum.end; index++) {
+      for (let index = this.startAndEndNum.start; index <= this.startAndEndNum.end; ++index) {
         dynamicPageNumbers.push(index);
       }
       return dynamicPageNumbers;

@@ -1,5 +1,4 @@
 <!-- 轮播图公共组件 -->
-
 <template>
   <div class="swiper-container" id="floor1Swiper" ref="floor">
     <div class="swiper-wrapper">
@@ -51,7 +50,7 @@ export default {
               stopOnLastSlide: false,
               disableOnInteraction: false,
             },
-            // 如果需要前进后退按钮
+            // 配置前进后退按钮
             navigation: {
               prevEl: ".swiper-button-prev",
               nextEl: ".swiper-button-next",

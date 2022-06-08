@@ -89,9 +89,8 @@ export default {
         .then(() => {
           this.$router.replace("/home");
         })
-        // 发送给服务端删除登录状态失败的情况
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     },
   },

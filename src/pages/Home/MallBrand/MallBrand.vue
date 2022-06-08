@@ -41,12 +41,6 @@
 <script>
 export default {
   name: "MallBrand",
-  data() {
-    return {};
-  },
-  components: {},
-  methods: {},
-  computed: {},
 };
 </script>
 

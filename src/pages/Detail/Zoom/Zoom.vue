@@ -22,7 +22,7 @@ export default {
       needShowIndex: 0,
       mask: null,
       bigShow: null,
-    }
+    };
   },
 
   methods: {
@@ -30,13 +30,14 @@ export default {
       const mask = this.mask;
       const bigShow = this.bigShow;
 
-      let left = event.offsetX - mask.offsetWidth / 2, top = event.offsetY - mask.offsetHeight / 2;
+      let left = event.offsetX - mask.offsetWidth / 2,
+        top = event.offsetY - mask.offsetHeight / 2;
       // 边界判断, 防止超出
       if (left <= 0) {
         left = 0;
       }
       if (left >= mask.offsetWidth) {
-        left = mask.offsetWidth
+        left = mask.offsetWidth;
       }
       if (top <= 0) {
         top = 0;
@@ -57,11 +58,10 @@ export default {
     this.$bus.$on("changeShowIndex", (index) => {
       this.needShowIndex = index;
     });
-
     this.mask = this.$refs.mask;
     this.bigShow = this.$refs.bigShow;
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
@@ -117,8 +117,8 @@ export default {
     }
   }
 
-  .event:hover~.mask,
-  .event:hover~.big {
+  .event:hover ~ .mask,
+  .event:hover ~ .big {
     display: block;
   }
 }

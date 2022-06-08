@@ -59,12 +59,6 @@
 <script>
 export default {
   name: "MallGuessLike",
-  data() {
-    return {};
-  },
-  components: {},
-  methods: {},
-  computed: {},
 };
 </script>
 

@@ -28,7 +28,7 @@ export default {
     if (from.path === "/pay") {
       next();
     } else {
-      next(false);
+      next(from.path);
     }
   },
 };

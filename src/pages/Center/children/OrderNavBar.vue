@@ -59,15 +59,6 @@
 <script>
 export default {
   name: "OrderNavBar",
-  data() {
-    return {};
-  },
-
-  components: {},
-
-  methods: {},
-
-  computed: {},
 };
 </script>
 

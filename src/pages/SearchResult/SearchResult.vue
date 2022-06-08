@@ -140,7 +140,7 @@
 const SearchSelector = () => import("./SearchSelector/SearchSelector.vue");
 import { mapGetters, mapState } from "vuex";
 export default {
-  name: "MallSearch",
+  name: "SearchResult",
   components: { SearchSelector },
   data() {
     return {

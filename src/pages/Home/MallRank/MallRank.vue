@@ -87,12 +87,6 @@
 <script>
 export default {
   name: "MallRank",
-  data() {
-    return {};
-  },
-  components: {},
-  methods: {},
-  computed: {},
 };
 </script>
 

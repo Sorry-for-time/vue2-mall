@@ -13,6 +13,7 @@
             <li>购物指南</li>
           </ul>
         </div>
+
         <div class="footerItem">
           <h4>配送方式</h4>
           <ul class="footerItemCon">
@@ -23,6 +24,7 @@
             <li>海外配送</li>
           </ul>
         </div>
+
         <div class="footerItem">
           <h4>支付方式</h4>
           <ul class="footerItemCon">
@@ -33,6 +35,7 @@
             <li>公司转账</li>
           </ul>
         </div>
+
         <div class="footerItem">
           <h4>售后服务</h4>
           <ul class="footerItemCon">
@@ -43,6 +46,7 @@
             <li>取消订单</li>
           </ul>
         </div>
+
         <div class="footerItem">
           <h4>特色服务</h4>
           <ul class="footerItemCon">
@@ -53,11 +57,13 @@
             <li>尚品汇通信</li>
           </ul>
         </div>
+
         <div class="footerItem">
           <h4>帮助中心</h4>
           <img src="./images/wx_cz.jpg" />
         </div>
       </div>
+
       <div class="copyright">
         <ul class="helpLink">
           <li v-for="(item, index) in helpDetail" :key="index">

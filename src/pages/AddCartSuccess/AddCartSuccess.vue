@@ -6,7 +6,7 @@
         <div class="left-good">
           <div class="left-pic">
             <!-- 图片 -->
-            <img :src="skuInfo.skuDefaultImg">
+            <img :src="skuInfo.skuDefaultImg" />
           </div>
           <div class="right-info">
             <!-- 产品名称 -->
@@ -28,21 +28,15 @@
 
 <script>
 export default {
-  name: 'AddCartSuccess', // 商品成功加入购物车成功提示界面
-  methods: {
-    backDetail() {
+  name: "AddCartSuccess", // 商品成功加入购物车成功提示界面
 
-    }
-  },
   computed: {
     // 取得存放再 sessionStorage 中存放的临时数据
     skuInfo() {
       return JSON.parse(sessionStorage.getItem("skuInfo"));
-    }
+    },
   },
-  mounted() {
-  }
-}
+};
 </script>
 
 <style lang="scss" scoped>

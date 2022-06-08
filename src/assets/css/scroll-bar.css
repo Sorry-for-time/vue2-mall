@@ -5,10 +5,9 @@
   border-bottom: none;
   border-top: none;
   box-sizing: content-box;
-  background-color: antiquewhite;
+  background-color: hsla(34, 78%, 91%, 0.616);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: scroll center
-    linear-gradient(60deg, hsl(212, 81%, 71%) 20%, hsl(180, 100%, 50%) 80%, hsl(235, 100%, 78%) 100%);
+  background: scroll center linear-gradient(hsl(251, 89%, 75%), hsl(197, 66%, 61%));
 }

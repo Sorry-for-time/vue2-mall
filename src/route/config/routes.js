@@ -1,6 +1,6 @@
 const MallHome = () => import("@/pages/Home/MallHome.vue");
 const MallLogin = () => import("@/pages/Login/MallLogin.vue");
-const MallSearch = () => import("@/pages/Search/MallSearch.vue");
+const SearchResult = () => import("@/pages/SearchResult/SearchResult.vue");
 const MallRegister = () => import("@/pages/Register/MallRegister.vue");
 const GoodDetail = () => import("@/pages/Detail/GoodDetail.vue");
 const AddCartSuccess = () => import("@/pages/AddCartSuccess/AddCartSuccess.vue");
@@ -59,7 +59,7 @@ export const routes = [
     name: "search",
     // 添加 ? 可设置参数可传可不传(类似正则表达式)
     path: "/search/:keyword?",
-    component: MallSearch,
+    component: SearchResult,
 
     /**
      * props: true
@@ -177,6 +177,7 @@ export const routes = [
         path: "myOrder",
         component: MyOrderList,
       },
+
       {
         name: "groupOrder",
         path: "groupOrder",

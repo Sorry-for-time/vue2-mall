@@ -27,10 +27,8 @@
               <img :src="floor.imgUrl" />
             </div>
             <div class="floorBanner">
-
               <!-- 轮播图 -->
               <Carousel :carouselList="floor.carouselList" />
-
             </div>
             <div class="split">
               <span class="floor-x-line"></span>

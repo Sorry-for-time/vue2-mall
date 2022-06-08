@@ -5,7 +5,7 @@
       <div class="value logos">
         <!-- 品牌展示 -->
         <ul class="logo-list">
-          <li v-for="(trademark) in trademarkList" :key="trademark.tmId" @click="trademarkHandler(trademark)">
+          <li v-for="trademark in trademarkList" :key="trademark.tmId" @click="trademarkHandler(trademark)">
             {{ trademark.tmName }}
           </li>
         </ul>
@@ -18,7 +18,7 @@
     </div>
 
     <!-- 售卖属性 -->
-    <div class="type-wrap" v-for="(attr) in attrsList" :key="attr.attrId">
+    <div class="type-wrap" v-for="attr in attrsList" :key="attr.attrId">
       <!-- 属性名 -->
       <div class="fl key">{{ attr.attrName }}</div>
 
@@ -34,15 +34,14 @@
 
       <div class="fl ext"></div>
     </div>
-
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'SearchSelector',
+  name: "SearchSelector",
 
   methods: {
     trademarkHandler(trademark) {
@@ -51,14 +50,14 @@ export default {
 
     // 平台售卖属性值点击事件
     attrInfo(attr, attrValue) {
-      this.$emit("attrInfo", attr, attrValue)
-    }
+      this.$emit("attrInfo", attr, attrValue);
+    },
   },
 
   computed: {
     ...mapGetters("search", ["trademarkList", "attrsList"]),
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
