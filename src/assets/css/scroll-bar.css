@@ -1,0 +1,13 @@
+::-webkit-scrollbar {
+  width: 10px;
+  border: 1px solid hsla(41, 35%, 33%, 0.301);
+  border-right: none;
+  border-bottom: none;
+  border-top: none;
+  box-sizing: content-box;
+  background-color: hsla(34, 78%, 91%, 0.616);
+}
+
+::-webkit-scrollbar-thumb {
+  background: scroll center linear-gradient(hsl(251, 89%, 75%), hsl(197, 66%, 61%));
+}
