@@ -140,7 +140,6 @@ export default {
           const result = await requestPayInfo(this.payInfo.orderId);
           // 清除定时器
           if (result.code == 200) {
-            console.log(result);
             clearInterval(this.timer);
             this.timer = null;
             this.code = result.code;

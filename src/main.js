@@ -10,6 +10,8 @@ import errorImage from "@/assets/load-error.png";
 
 import { router } from "@/route/router.js";
 import { store } from "@/store/store.js";
+
+// 按需引入 element 组件
 import { Button, MessageBox } from "element-ui";
 
 const TypeNav = () => import("@/pages/Home/TypeNav/TypeNav.vue");

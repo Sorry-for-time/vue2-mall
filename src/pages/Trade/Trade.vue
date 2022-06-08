@@ -142,8 +142,6 @@ export default {
       };
 
       const result = await requestSubmitPayInfo(tradeNo, data);
-      console.log(result);
-
       if (result.code == 200) {
         this.orderId = result.data;
         // 跳转到支付界面
