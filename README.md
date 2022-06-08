@@ -11,8 +11,7 @@
 
 ## 一个简单的介绍 👋
 
-看过了一些 vue 的教程和相关的博客, 也写了一些小小的玩具(todo-list 这种级别), 也体验了下 vue3 的一些新 feature(更完善的 ts 支持, teleport 和 suspense 组件...), 但一直没有去写过一个比较实际的项目(商城啊什么的), 于是决定万能的 [B 站](https://www.bilibili.com) 找个偏实战项目的教程跟着学习<span style="text-decoration: line-through; font-size: 10px;">CV</span>一遍, 加深开发理解和肌肉记忆 )<span style="text-decoration: line-through; font-size: 10px;">为了当一枚合格的切图业务员(严肃脸 🥲)</span>.
-这个项目基于 vue2<span style="font-size: 12px; background-color: blueviolet;">因为原视频教程就是基于 2</span>, 你可以通过点击[这里](https://www.bilibili.com/video/BV1Vf4y1T7bw?share_source=copy_web)跳转到原教程视频
+看过了一些 vue 的教程和相关的博客, 也写了一些小小的玩具(todo-list 这种级别), 也体验了下 vue3 的一些新 feature(更完善的 ts 支持, teleport 和 suspense 组件...), 但一直没有去写过一个比较实际的项目(商城啊什么的), 于是决定万能的 [B 站](https://www.bilibili.com) 找个偏实战项目的教程跟着学习~~CV~~一遍, 加深开发理解和肌肉记忆 )~~为了当一枚合格的切图业务员~~, 这个项目基于 `Vue2.6.14`, 你可以通过点击[这里](https://www.bilibili.com/video/BV1Vf4y1T7bw?share_source=copy_web)跳转到原教程视频
 此外, 愉快 CV 的时候也少不了看下 [MDN✨](https://developer.mozilla.org/) 和 vue2 的官方文档那些说明
 ps: 我不知道他们的原始项目 github 链接是哪个, 所以这里我以他们的教程视频链接为准
 [视频地址](https://www.bilibili.com/video/BV1Vf4y1T7bw?share_source=copy_web)
