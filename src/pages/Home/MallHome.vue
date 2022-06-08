@@ -5,7 +5,7 @@
     <!-- 主体大图展示区域 -->
     <ListContainer />
     <!-- 推荐 -->
-    <Recommend />
+    <MallCommend />
     <!-- 排行 -->
     <MallRank />
     <!-- 猜你喜欢(推荐) -->
@@ -21,7 +21,7 @@ import { mapState } from "vuex";
 
 // 使用异步引入, 编译编译拆分
 const ListContainer = () => import("@/pages/Home/ListContainer/ListContainer.vue");
-const Recommend = () => import("@/pages/Home/Recommend/Recommend.vue");
+const MallCommend = () => import("@/pages/Home/MallCommend/MallCommend.vue");
 const MallRank = () => import("@/pages/Home/MallRank/MallRank.vue");
 const MallGuessLike = () => import("@/pages/Home/GuessYouLike/MallGuessLike.vue");
 const MallFloor = () => import("@/pages/Home/MallFloor/MallFloor.vue");
@@ -32,7 +32,7 @@ export default {
 
   components: {
     ListContainer,
-    Recommend,
+    MallCommend,
     MallRank,
     MallGuessLike,
     MallFloor,
