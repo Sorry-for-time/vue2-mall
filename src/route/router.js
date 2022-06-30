@@ -41,11 +41,14 @@ const router = new VueRouter({
   routes,
 
   // 设置滚动行为
-  scrollBehavior: () => {
-    return {
-      behavior: "smooth",
-      y: 0,
-    };
+  scrollBehavior: (_to, _from, savedPosition) => {
+    if(savedPosition) {
+      return savedPosition
+    }else {
+      return {
+        y: 0
+      }
+    }
   },
 });
 

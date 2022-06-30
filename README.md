@@ -6,7 +6,7 @@
 	<img src="https://img.shields.io/badge/sass-1.52.1-pink" />
 	<img src="https://img.shields.io/badge/nprogress-0.2-lightgrey" />
 	<img src="https://img.shields.io/badge/and%20more-...-yellowgreen" />
-	<img src="https://img.shields.io/badge/license-MIT-blue" />
+  <img src="https://img.shields.io/badge/license-MIT-blue" />
 </div>
 
 ## 一个简单的介绍 👋
@@ -55,6 +55,7 @@ server {
 listen         80;
   server_name  192.xxx.xxx.xxx;
   location / {
+
       # 记得将实际路径换你自己的
       root      ${your-self_path}${project_name};
       index     index.html;
